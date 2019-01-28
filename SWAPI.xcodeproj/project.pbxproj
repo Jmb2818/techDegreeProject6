@@ -15,12 +15,10 @@
 		0B3C663021EC3D9A00F7EC20 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C662F21EC3D9A00F7EC20 /* DetailViewController.swift */; };
 		0B3C663221ED8F8200F7EC20 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663121ED8F8200F7EC20 /* InfoCell.swift */; };
 		0B3C663421EEECB900F7EC20 /* SWAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663321EEECB900F7EC20 /* SWAPIClient.swift */; };
-		0B3C663621EEECE400F7EC20 /* CharacterResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663521EEECE400F7EC20 /* CharacterResults.swift */; };
+		0B3C663621EEECE400F7EC20 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663521EEECE400F7EC20 /* Page.swift */; };
 		0B3C663821EEED6600F7EC20 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663721EEED6600F7EC20 /* Character.swift */; };
 		0B3C663A21EEF4C600F7EC20 /* SWAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663921EEF4C600F7EC20 /* SWAPIError.swift */; };
 		0B3C664021F417A300F7EC20 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C663F21F417A300F7EC20 /* Vehicle.swift */; };
-		0B3C664221F41CE500F7EC20 /* VehicleResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664121F41CE500F7EC20 /* VehicleResults.swift */; };
-		0B3C664421F41DC200F7EC20 /* StarshipResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664321F41DC200F7EC20 /* StarshipResults.swift */; };
 		0B3C664621F41DD200F7EC20 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664521F41DD200F7EC20 /* Starship.swift */; };
 		0B3C664821F5691300F7EC20 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664721F5691300F7EC20 /* Result.swift */; };
 		0B3C664A21F82DAE00F7EC20 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664921F82DAE00F7EC20 /* Planet.swift */; };
@@ -37,12 +35,10 @@
 		0B3C662F21EC3D9A00F7EC20 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0B3C663121ED8F8200F7EC20 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		0B3C663321EEECB900F7EC20 /* SWAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWAPIClient.swift; sourceTree = "<group>"; };
-		0B3C663521EEECE400F7EC20 /* CharacterResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterResults.swift; sourceTree = "<group>"; };
+		0B3C663521EEECE400F7EC20 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		0B3C663721EEED6600F7EC20 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		0B3C663921EEF4C600F7EC20 /* SWAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWAPIError.swift; sourceTree = "<group>"; };
 		0B3C663F21F417A300F7EC20 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
-		0B3C664121F41CE500F7EC20 /* VehicleResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleResults.swift; sourceTree = "<group>"; };
-		0B3C664321F41DC200F7EC20 /* StarshipResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipResults.swift; sourceTree = "<group>"; };
 		0B3C664521F41DD200F7EC20 /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
 		0B3C664721F5691300F7EC20 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0B3C664921F82DAE00F7EC20 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
@@ -88,11 +84,9 @@
 				0B25355021DC2F2600205748 /* Info.plist */,
 				0B3C663121ED8F8200F7EC20 /* InfoCell.swift */,
 				0B3C663321EEECB900F7EC20 /* SWAPIClient.swift */,
-				0B3C663521EEECE400F7EC20 /* CharacterResults.swift */,
+				0B3C663521EEECE400F7EC20 /* Page.swift */,
 				0B3C663721EEED6600F7EC20 /* Character.swift */,
 				0B3C663F21F417A300F7EC20 /* Vehicle.swift */,
-				0B3C664121F41CE500F7EC20 /* VehicleResults.swift */,
-				0B3C664321F41DC200F7EC20 /* StarshipResults.swift */,
 				0B3C664521F41DD200F7EC20 /* Starship.swift */,
 				0B3C664721F5691300F7EC20 /* Result.swift */,
 				0B3C664921F82DAE00F7EC20 /* Planet.swift */,
@@ -171,17 +165,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B3C663621EEECE400F7EC20 /* CharacterResults.swift in Sources */,
+				0B3C663621EEECE400F7EC20 /* Page.swift in Sources */,
 				0B3C664621F41DD200F7EC20 /* Starship.swift in Sources */,
 				0B3C663A21EEF4C600F7EC20 /* SWAPIError.swift in Sources */,
 				0B3C664021F417A300F7EC20 /* Vehicle.swift in Sources */,
 				0B3C663021EC3D9A00F7EC20 /* DetailViewController.swift in Sources */,
 				0B3C664821F5691300F7EC20 /* Result.swift in Sources */,
 				0B3C663821EEED6600F7EC20 /* Character.swift in Sources */,
-				0B3C664421F41DC200F7EC20 /* StarshipResults.swift in Sources */,
 				0B3C663221ED8F8200F7EC20 /* InfoCell.swift in Sources */,
 				0B25354721DC2F2200205748 /* ViewController.swift in Sources */,
-				0B3C664221F41CE500F7EC20 /* VehicleResults.swift in Sources */,
 				0B3C664A21F82DAE00F7EC20 /* Planet.swift in Sources */,
 				0B25354521DC2F2200205748 /* AppDelegate.swift in Sources */,
 				0B3C663421EEECB900F7EC20 /* SWAPIClient.swift in Sources */,

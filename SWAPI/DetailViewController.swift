@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     var characters: [Character] = []
     var vehicles: [Vehicle] = []
     var starships: [Starship] = []
+    var planets: [Planet] = []
     var selectedResult: Result?
     
     @IBOutlet weak var pickerView: UIPickerView!
