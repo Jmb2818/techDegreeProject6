@@ -37,10 +37,11 @@ class ViewController: UIViewController {
         starshipButton.isEnabled = false
     }
     
-    func displayDetailView(results: [Result] = [], title: String) {
+    func displayDetailView(results: [Result] = [], title: String, planets: [Planet]? = nil) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailViewController = storyboard.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController {
             detailViewController.results = results
+            detailViewController.planets = planets ?? []
             detailViewController.navigationItem.title = title
             self.navigationController?.pushViewController(detailViewController, animated: true)
         }
@@ -50,9 +51,12 @@ class ViewController: UIViewController {
         load()
         client.getCharacters(url: "https://swapi.co/api/people/") { [weak self] characters, error in
             if let characters = characters {
-                
-                self?.activityIndicator.stopAnimating()
-                self?.displayDetailView(results: characters, title: "Characters")
+                self?.client.getPlanets(url: "https://swapi.co/api/planets/") { [weak self] planets, error in
+                    if let planets = planets {
+                        self?.activityIndicator.stopAnimating()
+                        self?.displayDetailView(results: characters, title: "Characters", planets: planets)
+                    }
+                }
             }
         }
     }

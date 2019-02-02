@@ -15,4 +15,12 @@ struct Starship: Result, Codable {
     let length: String
     let starship_class: String
     let crew: String
+    
+    var lengthAsInt: Int {
+        if let length = Int(self.length) {
+            return length
+        } else {
+            return 0
+        }
+    }
 }

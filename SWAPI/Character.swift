@@ -18,4 +18,12 @@ struct Character: Result, Codable {
     let birth_year: String
     let gender: String
     let homeworld: String
+    
+    var heightAsInt: Int {
+        if let height = Int(self.height) {
+            return height
+        } else {
+            return 0
+        }
+    }
 }

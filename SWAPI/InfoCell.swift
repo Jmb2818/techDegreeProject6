@@ -15,9 +15,6 @@ class InfoCell: UITableViewCell {
     @IBOutlet weak var firstButton: UIButton!
     @IBOutlet weak var secondButton: UIButton!
     
-    
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -32,29 +29,41 @@ class InfoCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(with result: Result, row: Int, nameLable: UILabel) {
+    func configureCell(with result: Result, row: Int, nameLabel: UILabel, planets: [Planet]? = nil) {
         if let character = result as? Character {
-            configureCharacterCells(character: character, row: row, nameLabel: nameLable)
+            guard let planets = planets else {return}
+            let planet = findHomeworld(character: character, planets: planets)
+            configureCharacterCells(character: character, row: row, nameLabel: nameLabel, planet: planet)
         } else if let starship = result as? Starship {
-            configureStarshipCells(starship: starship, row: row, nameLabel: nameLable)
+            configureStarshipCells(starship: starship, row: row, nameLabel: nameLabel)
         } else if let vehicle = result as? Vehicle {
-            configureVehicleCells(vehicle: vehicle, row: row, nameLabel: nameLable)
+            configureVehicleCells(vehicle: vehicle, row: row, nameLabel: nameLabel)
         }
+    }
+    
+    func findHomeworld(character: Character, planets: [Planet]) -> Planet? {
+        for planet in planets {
+            if planet.url == character.homeworld {
+                return planet
+            }
+        }
+        
+        return nil
     }
 
     
-    func configureCharacterCells(character: Character, row: Int, nameLabel: UILabel) {
+    func configureCharacterCells(character: Character, row: Int, nameLabel: UILabel, planet: Planet?) {
         nameLabel.text = character.name
         switch row {
         case 0:
             self.firstLabel.text = "Born"
-            self.secondLabel.text = character.birth_year
+            self.secondLabel.text = character.birth_year.capitalized
         case 1:
             self.firstLabel.text = "Home"
-            self.secondLabel.text = character.homeworld
+            self.secondLabel.text = planet?.name ?? "Unknown"
         case 2:
             self.firstLabel.text = "Height"
-            self.secondLabel.text = character.height
+            self.secondLabel.text = character.height.capitalized
         case 3:
             self.firstLabel.text = "Eyes"
             self.secondLabel.text = character.eye_color.capitalized
@@ -75,16 +84,16 @@ class InfoCell: UITableViewCell {
             self.secondLabel.text = starship.manufacturer.capitalized
         case 1:
             self.firstLabel.text = "Cost"
-            self.secondLabel.text = starship.cost_in_credits
+            self.secondLabel.text = starship.cost_in_credits.capitalized
         case 2:
             self.firstLabel.text = "Length"
-            self.secondLabel.text = starship.length
+            self.secondLabel.text = starship.length.capitalized
         case 3:
             self.firstLabel.text = "Class"
             self.secondLabel.text = starship.starship_class.capitalized
         case 4:
             self.firstLabel.text = "Crew"
-            self.secondLabel.text = starship.crew
+            self.secondLabel.text = starship.crew.capitalized
         default:
             break
         }
@@ -98,10 +107,10 @@ class InfoCell: UITableViewCell {
             self.secondLabel.text = vehicle.manufacturer.capitalized
         case 1:
             self.firstLabel.text = "Cost"
-            self.secondLabel.text = vehicle.cost_in_credits
+            self.secondLabel.text = vehicle.cost_in_credits.capitalized
         case 2:
             self.firstLabel.text = "Length"
-            self.secondLabel.text = vehicle.length
+            self.secondLabel.text = vehicle.length.capitalized
         case 3:
             self.firstLabel.text = "Class"
             self.secondLabel.text = vehicle.vehicle_class.capitalized
@@ -112,4 +121,6 @@ class InfoCell: UITableViewCell {
             break
         }
     }
+    
+    
 }

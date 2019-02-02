@@ -228,8 +228,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvq-dz-01H">
                                 <rect key="frame" x="0.0" y="44" width="414" height="502"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Luke Skywalker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SF3-5U-ULb">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Luke Skywalker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="SF3-5U-ULb">
+                                        <rect key="frame" x="10" y="0.0" width="384" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="tuu-Eq-yF1"/>
                                         </constraints>
@@ -315,10 +315,10 @@
                                 <color key="backgroundColor" red="0.10588235294117647" green="0.12549019607843137" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ZKT-zO-Vr1" secondAttribute="bottom" constant="75" id="74v-Kl-9JQ"/>
-                                    <constraint firstItem="SF3-5U-ULb" firstAttribute="leading" secondItem="gvq-dz-01H" secondAttribute="leading" id="K9q-pl-0eN"/>
+                                    <constraint firstItem="SF3-5U-ULb" firstAttribute="leading" secondItem="ZKT-zO-Vr1" secondAttribute="leading" id="Rmk-Tw-Bmp"/>
                                     <constraint firstItem="ZKT-zO-Vr1" firstAttribute="top" secondItem="SF3-5U-ULb" secondAttribute="bottom" id="eRn-gc-oZZ"/>
                                     <constraint firstAttribute="trailing" secondItem="ZKT-zO-Vr1" secondAttribute="trailing" constant="20" id="oTC-Lw-CMr"/>
-                                    <constraint firstAttribute="trailing" secondItem="SF3-5U-ULb" secondAttribute="trailing" id="pMs-Ed-NeJ"/>
+                                    <constraint firstItem="SF3-5U-ULb" firstAttribute="trailing" secondItem="ZKT-zO-Vr1" secondAttribute="trailing" id="otn-Ja-8bU"/>
                                     <constraint firstItem="ZKT-zO-Vr1" firstAttribute="leading" secondItem="gvq-dz-01H" secondAttribute="leading" constant="10" id="uqP-cg-Epf"/>
                                     <constraint firstItem="SF3-5U-ULb" firstAttribute="top" secondItem="gvq-dz-01H" secondAttribute="top" id="vQC-U6-kAg"/>
                                 </constraints>
@@ -341,8 +341,10 @@
                         <viewLayoutGuide key="safeArea" id="Vd7-O0-JHE"/>
                     </view>
                     <connections>
+                        <outlet property="largestCharacter" destination="Ofp-ra-9B1" id="FQ7-GN-aVx"/>
                         <outlet property="nameLabel" destination="SF3-5U-ULb" id="vzA-s3-vls"/>
                         <outlet property="pickerView" destination="x1m-nh-RmQ" id="ay4-zW-Ofz"/>
+                        <outlet property="smallestCharacter" destination="h3n-U8-sg6" id="U0T-bQ-iYc"/>
                         <outlet property="tableView" destination="ZKT-zO-Vr1" id="QpO-LC-bSB"/>
                     </connections>
                 </viewController>

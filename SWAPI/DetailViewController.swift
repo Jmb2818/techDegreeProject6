@@ -20,16 +20,35 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var smallestCharacter: UILabel!
+    @IBOutlet weak var largestCharacter: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1058823529, green: 0.1254901961, blue: 0.1411764706, alpha: 1)
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.5529411765, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
+        sortObjectsBySize(results: results)
     }
     
-    func updateView() {
-        //TODO: update table view
+    func sortObjectsBySize(results: [Result]) {
+        //TODO: fix with sync class and database class
+        if let characterResults = results as? [Character] {
+            let sortedCharacters = characterResults.sorted(by: { $0.heightAsInt > $1.heightAsInt })
+            let sortedCharactersWithoutUnknown = sortedCharacters.filter { $0.heightAsInt != 0 }
+            largestCharacter.text = sortedCharactersWithoutUnknown.first?.name
+            smallestCharacter.text = sortedCharactersWithoutUnknown.last?.name
+        } else if let vehicleResults = results as? [Vehicle] {
+            let sortedVehicles = vehicleResults.sorted(by: { $0.lengthAsInt > $1.lengthAsInt })
+            let sortedVehiclesWithoutUnknown = sortedVehicles.filter { $0.lengthAsInt != 0 }
+            largestCharacter.text = sortedVehiclesWithoutUnknown.first?.name
+            smallestCharacter.text = sortedVehiclesWithoutUnknown.last?.name
+        } else if let starshipResults = results as? [Starship] {
+            let sortedStarships = starshipResults.sorted(by: { $0.lengthAsInt > $1.lengthAsInt })
+            let sortedStarshipsWithoutUnknown = sortedStarships.filter { $0.lengthAsInt != 0 }
+            largestCharacter.text = sortedStarshipsWithoutUnknown.first?.name
+            smallestCharacter.text = sortedStarshipsWithoutUnknown.last?.name
+        }
     }
 }
 
@@ -48,9 +67,9 @@ extension DetailViewController: UITableViewDataSource {
         
         tableView.rowHeight = (tableViewHeight/5)
         if let result = selectedResult {
-            cell.configureCell(with: result, row: indexPath.row, nameLable: nameLabel)
+            cell.configureCell(with: result, row: indexPath.row, nameLabel: nameLabel, planets: planets)
         } else {
-            cell.configureCell(with: results[0], row: indexPath.row, nameLable: nameLabel)
+            cell.configureCell(with: results[0], row: indexPath.row, nameLabel: nameLabel, planets: planets)
         }
         
         return cell
