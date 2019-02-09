@@ -106,27 +106,27 @@ class InfoCell: UITableViewCell {
         nameLabel.text = character.name
         switch row {
         case 0:
-            self.firstLabel.text = "Born"
-            self.secondLabel.text = character.birth_year.capitalized
+            firstLabel.text = "Born"
+            secondLabel.text = character.birth_year.capitalized
         case 1:
-            self.firstLabel.text = "Home"
-            self.secondLabel.text = planet?.name.capitalized ?? "Unknown"
+            firstLabel.text = "Home"
+            secondLabel.text = planet?.name.capitalized ?? "Unknown"
         case 2:
-            self.isUserInteractionEnabled = true
-            self.firstLabel.text = "Height"
-            self.secondLabel.text = Formatter.formatMetersFromString(string: character.height)
-            self.thirdLabel.isHidden = false
-            self.thirdLabel.text = "English"
-            self.fourthLabel.isHidden = false
-            self.fourthLabel.text = "Metric"
+            isUserInteractionEnabled = true
+            firstLabel.text = "Height"
+            secondLabel.text = Formatter.formatMetersFromString(string: character.height)
+            thirdLabel.isHidden = false
+            thirdLabel.text = "English"
+            fourthLabel.isHidden = false
+            fourthLabel.text = "Metric"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            self.fourthLabel.textColor = .white
+            fourthLabel.textColor = .white
         case 3:
-            self.firstLabel.text = "Eyes"
-            self.secondLabel.text = character.eye_color.capitalized
+            firstLabel.text = "Eyes"
+            secondLabel.text = character.eye_color.capitalized
         case 4:
-            self.firstLabel.text = "Hair"
-            self.secondLabel.text = character.hair_color.capitalized
+            firstLabel.text = "Hair"
+            secondLabel.text = character.hair_color.capitalized
         default:
             break
         }
@@ -136,34 +136,35 @@ class InfoCell: UITableViewCell {
         nameLabel.text = starship.name
         switch row {
         case 0:
-            self.firstLabel.text = "Make"
-            self.secondLabel.text = starship.manufacturer.capitalized
+            firstLabel.text = "Make"
+            secondLabel.text = starship.manufacturer.capitalized
         case 1:
-            self.isUserInteractionEnabled = true
-            self.firstLabel.text = "Cost"
-            self.secondLabel.text = Formatter.formatNumberWithComma(starship.cost_in_credits.capitalized)
-            self.thirdLabel.isHidden = false
-            self.thirdLabel.text = "USD"
-            self.fourthLabel.isHidden = false
-            self.fourthLabel.text = "Credits"
+            isUserInteractionEnabled = true
+            firstLabel.text = "Cost"
+            secondLabel.numberOfLines = 1
+            secondLabel.text = Formatter.formatNumberWithComma(starship.cost_in_credits.capitalized)
+            thirdLabel.isHidden = false
+            thirdLabel.text = "USD"
+            fourthLabel.isHidden = false
+            fourthLabel.text = "Credits"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            self.fourthLabel.textColor = .white
+            fourthLabel.textColor = .white
         case 2:
-            self.isUserInteractionEnabled = true
-            self.firstLabel.text = "Length"
-            self.secondLabel.text = "\(starship.length)m"
-            self.thirdLabel.isHidden = false
-            self.thirdLabel.text = "English"
-            self.fourthLabel.isHidden = false
-            self.fourthLabel.text = "Metric"
+            isUserInteractionEnabled = true
+            firstLabel.text = "Length"
+            secondLabel.text = "\(starship.length)m"
+            thirdLabel.isHidden = false
+            thirdLabel.text = "English"
+            fourthLabel.isHidden = false
+            fourthLabel.text = "Metric"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            self.fourthLabel.textColor = .white
+            fourthLabel.textColor = .white
         case 3:
-            self.firstLabel.text = "Class"
-            self.secondLabel.text = starship.starship_class.capitalized
+            firstLabel.text = "Class"
+            secondLabel.text = starship.starship_class.capitalized
         case 4:
-            self.firstLabel.text = "Crew"
-            self.secondLabel.text = starship.crew.capitalized
+            firstLabel.text = "Crew"
+            secondLabel.text = starship.crew.capitalized
         default:
             break
         }
@@ -179,6 +180,7 @@ class InfoCell: UITableViewCell {
         case 1:
             isUserInteractionEnabled = true
             firstLabel.text = "Cost"
+            secondLabel.numberOfLines = 1
             secondLabel.text = Formatter.formatNumberWithComma(vehicle.cost_in_credits.capitalized)
             thirdLabel.isHidden = false
             thirdLabel.text = "USD"
