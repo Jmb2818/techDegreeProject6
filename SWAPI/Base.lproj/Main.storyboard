@@ -264,45 +264,39 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="op6-Ku-4vG">
-                                                            <rect key="frame" x="265" y="35" width="50" height="30"/>
-                                                            <state key="normal" title="English">
-                                                                <color key="titleColor" red="0.37647058823529411" green="0.38823529411764707" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <state key="selected">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </state>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXR-4C-cHI">
-                                                            <rect key="frame" x="320" y="35" width="44" height="30"/>
-                                                            <state key="normal" title="Metric">
-                                                                <color key="titleColor" red="0.37647058823529411" green="0.38823529411764707" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <state key="selected">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </state>
-                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPg-Pe-q66">
+                                                            <rect key="frame" x="259" y="39.5" width="56" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.37647058823529411" green="0.38823529411764707" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Metric" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-jL-Smm">
+                                                            <rect key="frame" x="325" y="39.5" width="49" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.37647058823529411" green="0.38823529411764707" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="gPg-Pe-q66" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TSY-t1-f7x" secondAttribute="trailing" constant="10" id="18B-3O-uGC"/>
+                                                        <constraint firstItem="gPg-Pe-q66" firstAttribute="centerY" secondItem="kZM-Fe-fFR" secondAttribute="centerY" id="4XS-nG-PfH"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="TSY-t1-f7x" secondAttribute="bottom" id="4rv-e2-A1Y"/>
-                                                        <constraint firstItem="op6-Ku-4vG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TSY-t1-f7x" secondAttribute="trailing" constant="10" id="9vq-uu-Fs4"/>
-                                                        <constraint firstItem="yXR-4C-cHI" firstAttribute="centerY" secondItem="kZM-Fe-fFR" secondAttribute="centerY" id="AmB-G9-fxJ"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="yXR-4C-cHI" secondAttribute="trailing" id="BL3-Zf-ay0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="6yh-jL-Smm" secondAttribute="trailing" constant="10" id="Fao-tU-Yhc"/>
                                                         <constraint firstItem="TSY-t1-f7x" firstAttribute="centerY" secondItem="kZM-Fe-fFR" secondAttribute="centerY" id="GgC-7H-Wr6"/>
-                                                        <constraint firstItem="yXR-4C-cHI" firstAttribute="leading" secondItem="op6-Ku-4vG" secondAttribute="trailing" constant="5" id="H4X-X1-ExF"/>
                                                         <constraint firstItem="Ll1-rE-Pwb" firstAttribute="centerY" secondItem="kZM-Fe-fFR" secondAttribute="centerY" id="Rkf-dg-c9a"/>
                                                         <constraint firstItem="Ll1-rE-Pwb" firstAttribute="leading" secondItem="kZM-Fe-fFR" secondAttribute="leadingMargin" id="S6M-U8-YO0"/>
-                                                        <constraint firstItem="op6-Ku-4vG" firstAttribute="centerY" secondItem="kZM-Fe-fFR" secondAttribute="centerY" id="Xyx-xY-mcO"/>
                                                         <constraint firstItem="TSY-t1-f7x" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kZM-Fe-fFR" secondAttribute="topMargin" id="i7r-EO-dP8"/>
                                                         <constraint firstItem="TSY-t1-f7x" firstAttribute="leading" secondItem="Ll1-rE-Pwb" secondAttribute="trailing" constant="30" id="rt5-kV-3mX"/>
+                                                        <constraint firstItem="6yh-jL-Smm" firstAttribute="leading" secondItem="gPg-Pe-q66" secondAttribute="trailing" constant="10" id="vWK-6J-CyD"/>
+                                                        <constraint firstItem="6yh-jL-Smm" firstAttribute="centerY" secondItem="kZM-Fe-fFR" secondAttribute="centerY" id="yjm-e9-xYl"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.10588235294117647" green="0.12549019607843137" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
-                                                    <outlet property="firstButton" destination="op6-Ku-4vG" id="dFJ-j0-t8F"/>
                                                     <outlet property="firstLabel" destination="Ll1-rE-Pwb" id="fCW-rE-mCd"/>
-                                                    <outlet property="secondButton" destination="yXR-4C-cHI" id="x8u-1J-bLT"/>
+                                                    <outlet property="fourthLabel" destination="6yh-jL-Smm" id="na3-QR-ihq"/>
                                                     <outlet property="secondLabel" destination="TSY-t1-f7x" id="f15-gk-eb1"/>
+                                                    <outlet property="thirdLabel" destination="gPg-Pe-q66" id="0oX-cg-DvT"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

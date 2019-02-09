@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SWAPI/DetailViewController.swift"
-            timestampString = "570691217.632949"
+            filePath = "SWAPI/Formatter.swift"
+            timestampString = "571439188.1193449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "sortObjectsBySize(results:)"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "formatMetersFromString(string:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SWAPI/DetailViewController.swift"
-            timestampString = "570691217.633114"
+            filePath = "SWAPI/InfoCell.swift"
+            timestampString = "571439188.12009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "numberOfSections(in:)"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "returnImperialUnits()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SWAPI/Formatter.swift"
+            timestampString = "571439188.120756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "formatToOneDeimal(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

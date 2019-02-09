@@ -22,6 +22,8 @@
 		0B3C664621F41DD200F7EC20 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664521F41DD200F7EC20 /* Starship.swift */; };
 		0B3C664821F5691300F7EC20 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664721F5691300F7EC20 /* Result.swift */; };
 		0B3C664A21F82DAE00F7EC20 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664921F82DAE00F7EC20 /* Planet.swift */; };
+		0BB5E3802207485700DEB528 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E37F2207485700DEB528 /* Formatter.swift */; };
+		0BB5E3822209589C00DEB528 /* UserStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E3812209589C00DEB528 /* UserStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		0B3C664521F41DD200F7EC20 /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
 		0B3C664721F5691300F7EC20 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0B3C664921F82DAE00F7EC20 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		0BB5E37F2207485700DEB528 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		0BB5E3812209589C00DEB528 /* UserStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 				0B3C664521F41DD200F7EC20 /* Starship.swift */,
 				0B3C664721F5691300F7EC20 /* Result.swift */,
 				0B3C664921F82DAE00F7EC20 /* Planet.swift */,
+				0BB5E37F2207485700DEB528 /* Formatter.swift */,
+				0BB5E3812209589C00DEB528 /* UserStrings.swift */,
 			);
 			path = SWAPI;
 			sourceTree = "<group>";
@@ -166,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B3C663621EEECE400F7EC20 /* Page.swift in Sources */,
+				0BB5E3802207485700DEB528 /* Formatter.swift in Sources */,
 				0B3C664621F41DD200F7EC20 /* Starship.swift in Sources */,
 				0B3C663A21EEF4C600F7EC20 /* SWAPIError.swift in Sources */,
 				0B3C664021F417A300F7EC20 /* Vehicle.swift in Sources */,
@@ -175,6 +182,7 @@
 				0B3C663221ED8F8200F7EC20 /* InfoCell.swift in Sources */,
 				0B25354721DC2F2200205748 /* ViewController.swift in Sources */,
 				0B3C664A21F82DAE00F7EC20 /* Planet.swift in Sources */,
+				0BB5E3822209589C00DEB528 /* UserStrings.swift in Sources */,
 				0B25354521DC2F2200205748 /* AppDelegate.swift in Sources */,
 				0B3C663421EEECB900F7EC20 /* SWAPIClient.swift in Sources */,
 			);

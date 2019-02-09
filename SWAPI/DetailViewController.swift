@@ -76,6 +76,17 @@ extension DetailViewController: UITableViewDataSource {
     }
 }
 
+extension DetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? InfoCell else { return }
+        if indexPath.row == 1 {
+            cell.configureMoney()
+        } else if indexPath.row == 2 {
+            cell.configureLength()
+        }
+    }
+}
+
 extension DetailViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
