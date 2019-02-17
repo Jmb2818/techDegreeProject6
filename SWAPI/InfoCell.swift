@@ -17,6 +17,7 @@ class InfoCell: UITableViewCell {
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
     @IBOutlet weak var fourthLabel: UILabel!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,21 +49,26 @@ class InfoCell: UITableViewCell {
         return nil
     }
     
-    func configureMoney() {
+    func configureMoney(conversionRate: Int) {
+        guard conversionRate > 0 else {
+            //TODO: Throw conversion rate incorrect error
+            return
+        }
         if thirdLabel.textColor == .white {
             fourthLabel.textColor = .white
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             let secondLabelWithoutDollar = self.secondLabel.text?.filter({ $0 != "$"})
             let secondLabel = secondLabelWithoutDollar?.filter( { $0 != ","})
             if let cost = secondLabel, let credits = Int(cost) {
-                self.secondLabel.text = "\(credits/4)"
+                let costInCreditsString = String(credits/conversionRate)
+                self.secondLabel.text = "\(Formatter.formatNumberWithComma(costInCreditsString))"
             }
         } else if fourthLabel.textColor == .white {
             thirdLabel.textColor = .white
             fourthLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             let secondLabel = self.secondLabel.text?.filter( { $0 != ","})
             if let cost = secondLabel, let credits = Int(cost) {
-                 let costInDollarsString = String(credits * 4)
+                let costInDollarsString = String(credits * conversionRate)
                 self.secondLabel.text = "$\(Formatter.formatNumberWithComma(costInDollarsString))"
             }
         }
@@ -87,7 +93,7 @@ class InfoCell: UITableViewCell {
         
         if let feet = secondLabel, let length = Double(feet) {
             let meters = Measurement(value: length, unit: UnitLength.inches).converted(to: .meters).value
-            self.secondLabel.text = "\(Formatter.formatToOneDeimal(meters))m"
+            self.secondLabel.text = "\(Formatter.formatToOneDecimal(meters))m"
         }
     }
     
@@ -96,28 +102,30 @@ class InfoCell: UITableViewCell {
         let secondLabel = secondLabelNoM?.filter( { $0 != ","})
         if let meters = secondLabel, let length = Double(meters) {
             let feet = Measurement(value: length, unit: UnitLength.meters).converted(to: .inches).value
-            self.secondLabel.text = "\(Formatter.formatToOneDeimal(feet))in"
+            self.secondLabel.text = "\(Formatter.formatToOneDecimal(feet))in"
         }
     }
 
     
     func configureCharacterCells(character: Character, row: Int, nameLabel: UILabel, planet: Planet?) {
-        // TODO: Give the cell a model
-        nameLabel.text = character.name
+        // TODO: Give the cell a model and have it init with each number but name the variables the same
+        // so firstLabel.text = model.name, firstLabel.text = model.firstCellLabel
+        nameLabel.text = character.name.capitalizeTitle()
         switch row {
         case 0:
             firstLabel.text = "Born"
-            secondLabel.text = character.birth_year.capitalized
+            secondLabel.text = character.birth_year.capitalizeBirthYear()
         case 1:
             firstLabel.text = "Home"
+            updateConstraintForFullTitle()
             secondLabel.text = planet?.name.capitalized ?? "Unknown"
         case 2:
             isUserInteractionEnabled = true
             firstLabel.text = "Height"
             secondLabel.text = Formatter.formatMetersFromString(string: character.height)
-            thirdLabel.isHidden = false
+            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             thirdLabel.text = "English"
-            fourthLabel.isHidden = false
+            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             fourthLabel.text = "Metric"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             fourthLabel.textColor = .white
@@ -133,34 +141,36 @@ class InfoCell: UITableViewCell {
     }
     
     func configureStarshipCells(starship: Starship, row: Int, nameLabel: UILabel) {
-        nameLabel.text = starship.name
+        nameLabel.text = starship.name.capitalizeTitle()
         switch row {
         case 0:
             firstLabel.text = "Make"
+            updateConstraintForFullTitle()
             secondLabel.text = starship.manufacturer.capitalized
         case 1:
             isUserInteractionEnabled = true
             firstLabel.text = "Cost"
             secondLabel.numberOfLines = 1
             secondLabel.text = Formatter.formatNumberWithComma(starship.cost_in_credits.capitalized)
-            thirdLabel.isHidden = false
+            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             thirdLabel.text = "USD"
-            fourthLabel.isHidden = false
+            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             fourthLabel.text = "Credits"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             fourthLabel.textColor = .white
         case 2:
             isUserInteractionEnabled = true
             firstLabel.text = "Length"
-            secondLabel.text = "\(starship.length)m"
-            thirdLabel.isHidden = false
+            secondLabel.text = "\(Formatter.formatNumberWithComma(starship.length, withUnit: "m"))"
+            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             thirdLabel.text = "English"
-            fourthLabel.isHidden = false
+            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             fourthLabel.text = "Metric"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             fourthLabel.textColor = .white
         case 3:
             firstLabel.text = "Class"
+            updateConstraintForFullTitle()
             secondLabel.text = starship.starship_class.capitalized
         case 4:
             firstLabel.text = "Crew"
@@ -172,34 +182,36 @@ class InfoCell: UITableViewCell {
     
     func configureVehicleCells(vehicle: Vehicle, row: Int, nameLabel: UILabel) {
         // TODO: Maybe use codable keys to rename vars so that you can be more generic with name, length, url
-        nameLabel.text = vehicle.name
+        nameLabel.text = vehicle.name.capitalizeTitle()
         switch row {
         case 0:
             firstLabel.text = "Make"
+            updateConstraintForFullTitle()
             secondLabel.text = vehicle.manufacturer.capitalized
         case 1:
             isUserInteractionEnabled = true
             firstLabel.text = "Cost"
             secondLabel.numberOfLines = 1
             secondLabel.text = Formatter.formatNumberWithComma(vehicle.cost_in_credits.capitalized)
-            thirdLabel.isHidden = false
+            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             thirdLabel.text = "USD"
-            fourthLabel.isHidden = false
+            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             fourthLabel.text = "Credits"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             fourthLabel.textColor = .white
         case 2:
             isUserInteractionEnabled = true
             firstLabel.text = "Length"
-            secondLabel.text = "\(vehicle.length)m"
-            thirdLabel.isHidden = false
+            secondLabel.text = "\(Formatter.formatNumberWithComma(vehicle.length, withUnit: "m"))"
+            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             thirdLabel.text = "English"
-            fourthLabel.isHidden = false
+            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
             fourthLabel.text = "Metric"
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
             fourthLabel.textColor = .white
         case 3:
             firstLabel.text = "Class"
+            updateConstraintForFullTitle()
             secondLabel.text = vehicle.vehicle_class.capitalized
         case 4:
             firstLabel.text = "Crew"
@@ -207,5 +219,9 @@ class InfoCell: UITableViewCell {
         default:
             break
         }
+    }
+    
+    func updateConstraintForFullTitle() {
+        secondLabel.trailingAnchor.constraint(equalTo: fourthLabel.trailingAnchor, constant: 0).isActive = true
     }
 }

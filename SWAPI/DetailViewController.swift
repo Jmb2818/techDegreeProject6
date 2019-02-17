@@ -22,6 +22,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var smallestCharacter: UILabel!
     @IBOutlet weak var largestCharacter: UILabel!
+    @IBOutlet weak var conversionTitle: UILabel!
+    @IBOutlet weak var conversionTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,7 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1058823529, green: 0.1254901961, blue: 0.1411764706, alpha: 1)
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.5529411765, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
         sortObjectsBySize(results: results)
+        conversionTextField.text = "1"
     }
     
     func sortObjectsBySize(results: [Result]) {
@@ -71,6 +74,10 @@ extension DetailViewController: UITableViewDataSource {
         } else {
             cell.configureCell(with: results[0], row: indexPath.row, nameLabel: nameLabel, planets: planets)
         }
+        if (!cell.thirdLabel.isHidden || !cell.fourthLabel.isHidden) && indexPath.row == 1 {
+            conversionTitle.isHidden = false
+            conversionTextField.isHidden = false
+        }
         
         return cell
     }
@@ -80,7 +87,13 @@ extension DetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? InfoCell else { return }
         if indexPath.row == 1 {
-            cell.configureMoney()
+            guard let conversionRateString = conversionTextField.text,
+                let conversionRate = Int(conversionRateString)
+                else {
+                    cell.configureMoney(conversionRate: 1)
+                    return
+            }
+            cell.configureMoney(conversionRate: conversionRate)
         } else if indexPath.row == 2 {
             cell.configureLength()
         }
@@ -100,10 +113,13 @@ extension DetailViewController: UIPickerViewDataSource {
 extension DetailViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return results[row].name
+        return results[row].name.capitalizeTitle()
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedResult = results[row]
         tableView.reloadData()
+        conversionTitle.isHidden = true
+        conversionTextField.isHidden = true
     }
 }

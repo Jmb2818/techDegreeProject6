@@ -10,6 +10,9 @@ import Foundation
 
 class UserStrings {
     enum General {
-       
+        static let unknown = "unknown"
+        static let characters = "Characters"
+        static let vehicles = "Vehicles"
+        static let starships = "Starships"
     }
 }

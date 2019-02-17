@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Starship: Result, Codable {
+struct Starship: Result, Codable, Hashable {
     let name: String
     let manufacturer: String
     let cost_in_credits: String

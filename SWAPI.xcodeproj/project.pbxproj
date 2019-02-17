@@ -24,6 +24,8 @@
 		0B3C664A21F82DAE00F7EC20 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3C664921F82DAE00F7EC20 /* Planet.swift */; };
 		0BB5E3802207485700DEB528 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E37F2207485700DEB528 /* Formatter.swift */; };
 		0BB5E3822209589C00DEB528 /* UserStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E3812209589C00DEB528 /* UserStrings.swift */; };
+		0BB5E38422100B6000DEB528 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E38322100B6000DEB528 /* StringExtensions.swift */; };
+		0BB5E3882218D79200DEB528 /* SWDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E3872218D79100DEB528 /* SWDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		0B3C664921F82DAE00F7EC20 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		0BB5E37F2207485700DEB528 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		0BB5E3812209589C00DEB528 /* UserStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStrings.swift; sourceTree = "<group>"; };
+		0BB5E38322100B6000DEB528 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		0BB5E3872218D79100DEB528 /* SWDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 				0B3C664921F82DAE00F7EC20 /* Planet.swift */,
 				0BB5E37F2207485700DEB528 /* Formatter.swift */,
 				0BB5E3812209589C00DEB528 /* UserStrings.swift */,
+				0BB5E38322100B6000DEB528 /* StringExtensions.swift */,
+				0BB5E3872218D79100DEB528 /* SWDataSource.swift */,
 			);
 			path = SWAPI;
 			sourceTree = "<group>";
@@ -172,6 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B3C663621EEECE400F7EC20 /* Page.swift in Sources */,
+				0BB5E38422100B6000DEB528 /* StringExtensions.swift in Sources */,
+				0BB5E3882218D79200DEB528 /* SWDataSource.swift in Sources */,
 				0BB5E3802207485700DEB528 /* Formatter.swift in Sources */,
 				0B3C664621F41DD200F7EC20 /* Starship.swift in Sources */,
 				0B3C663A21EEF4C600F7EC20 /* SWAPIError.swift in Sources */,

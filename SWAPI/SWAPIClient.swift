@@ -9,7 +9,7 @@
 import UIKit
 
 class SWAPIClient {
-
+    
     let decoder = JSONDecoder()
     
     let session: URLSession
@@ -23,7 +23,7 @@ class SWAPIClient {
     }
     
     
-    private func getCharacterResults(absoluteString: String?, completionHandler completion: @escaping (Page<Character>?, Error?) -> Void) {
+    func getCharacterResults(absoluteString: String?, completionHandler completion: @escaping (Page<Character>?, Error?) -> Void) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(nil, SWAPIError.generic)
             return
@@ -34,7 +34,7 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    private func getVehicleResults(absoluteString: String?, completionHandler completion: @escaping (Page<Vehicle>?, Error?) -> Void) {
+    func getVehicleResults(absoluteString: String?, completionHandler completion: @escaping (Page<Vehicle>?, Error?) -> Void) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(nil, SWAPIError.generic)
             return
@@ -45,7 +45,7 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    private func getStarshipResults(absoluteString: String?, completionHandler completion: @escaping (Page<Starship>?, Error?) -> Void) {
+    func getStarshipResults(absoluteString: String?, completionHandler completion: @escaping (Page<Starship>?, Error?) -> Void) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(nil, SWAPIError.generic)
             return
@@ -56,7 +56,7 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    private func getPlanetResults(absoluteString: String?, completionHandler completion: @escaping (Page<Planet>?, Error?) -> Void) {
+    func getPlanetResults(absoluteString: String?, completionHandler completion: @escaping (Page<Planet>?, Error?) -> Void) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(nil, SWAPIError.generic)
             return
@@ -91,56 +91,5 @@ class SWAPIClient {
             }
         }
         task.resume()
-    }
-
-    
-    var characters: [Character] = []
-    var vehicles: [Vehicle] = []
-    var starships: [Starship] = []
-    var planets: [Planet] = []
-    
-    
-    func getCharacters(url: String?, completionHandler completion: @escaping ([Character]?, Error?) -> Void) {
-        getCharacterResults(absoluteString: url) { [weak self] results, error in
-            if self?.characters.count != results?.count, let _results = results {
-                self?.characters.append(contentsOf: _results.results)
-                self?.getCharacters(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.characters, error)
-            }
-        }
-    }
-    
-    func getVehicles(url: String?, completionHandler completion: @escaping ([Vehicle]?, Error?) -> Void) {
-        getVehicleResults(absoluteString: url) { [weak self] results, error in
-            if self?.vehicles.count != results?.count , let _results = results {
-                self?.vehicles.append(contentsOf: _results.results)
-                self?.getVehicles(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.vehicles, error)
-            }
-        }
-    }
-   
-    func getStarships(url: String?, completionHandler completion: @escaping ([Starship]?, Error?) -> Void) {
-        getStarshipResults(absoluteString: url) { [weak self] results, error in
-            if self?.starships.count != results?.count, let _results = results {
-                self?.starships.append(contentsOf: _results.results)
-                self?.getStarships(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.starships, error)
-            }
-        }
-    }
-    
-    func getPlanets(url: String?, completionHandler completion: @escaping ([Planet]?, Error?) -> Void) {
-        getPlanetResults(absoluteString: url) { [weak self] results, error in
-            if self?.planets.count != results?.count, let _results = results {
-                self?.planets.append(contentsOf: _results.results)
-                self?.getPlanets(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.planets, error)
-            }
-        }
     }
 }
