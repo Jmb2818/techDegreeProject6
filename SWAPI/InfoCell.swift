@@ -33,8 +33,7 @@ class InfoCell: UITableViewCell {
         if thirdLabel.textColor == .white {
             fourthLabel.textColor = .white
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            let secondLabelWithoutDollar = self.secondLabel.text?.filter({ $0 != "$"})
-            let secondLabel = secondLabelWithoutDollar?.filter( { $0 != ","})
+            let secondLabel = self.secondLabel.text?.filter( { !($0 == "," || $0 == "$") })
             if let cost = secondLabel, let credits = Int(cost) {
                 let costInCreditsString = String(credits/conversionRate)
                 self.secondLabel.text = "\(Formatter.formatNumberWithComma(costInCreditsString))"
@@ -54,38 +53,37 @@ class InfoCell: UITableViewCell {
         if thirdLabel.textColor == .white {
             fourthLabel.textColor = .white
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            returnMetricUnits()
+            secondLabel.text = Formatter.returnMetricUnits(secondLabelText: secondLabel.text)
         } else if fourthLabel.textColor == .white {
             thirdLabel.textColor = .white
             fourthLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            returnImperialUnits()
+            secondLabel.text = Formatter.returnImperialUnits(secondLabelText: secondLabel.text)
         }
     }
     
-    func returnMetricUnits() {
-        let secondLabelNoN = self.secondLabel.text?.filter({ $0 != "n"})
-        let secondLabelNoI = secondLabelNoN?.filter({ $0 != "i"})
-        let secondLabel = secondLabelNoI?.filter( { $0 != ","})
-        
-        if let feet = secondLabel, let length = Double(feet) {
-            let meters = Measurement(value: length, unit: UnitLength.inches).converted(to: .meters).value
-            self.secondLabel.text = "\(Formatter.formatToOneDecimal(meters))m"
-        }
-    }
-    
-    func returnImperialUnits() {
-        let secondLabelNoM = self.secondLabel.text?.filter({ $0 != "m"})
-        let secondLabel = secondLabelNoM?.filter( { $0 != ","})
-        if let meters = secondLabel, let length = Double(meters) {
-            let feet = Measurement(value: length, unit: UnitLength.meters).converted(to: .inches).value
-            self.secondLabel.text = "\(Formatter.formatToOneDecimal(feet))in"
-        }
-    }
+//    func returnMetricUnits() {
+//        let secondLabelNoComma = self.secondLabel.text?.filter({ $0 != "," })
+//        let secondLabel = secondLabelNoComma?.filter( { !($0 == "i" ||  $0 == "n") })
+//
+//        if let feet = secondLabel, let length = Double(feet) {
+//            let meters = Measurement(value: length, unit: UnitLength.inches).converted(to: .meters).value
+//            self.secondLabel.text = "\(Formatter.formatToOneDecimal(meters))m"
+//        }
+//    }
+//
+//    func returnImperialUnits() {
+//        let secondLabel = self.secondLabel.text?.filter( { !($0 == "," || $0 == "m") })
+//        if let meters = secondLabel, let length = Double(meters) {
+//            let feet = Measurement(value: length, unit: UnitLength.meters).converted(to: .inches).value
+//            self.secondLabel.text = "\(Formatter.formatToOneDecimal(feet))in"
+//        }
+//    }
     
     func configureCell(model: InfoCellModel) {
         isUserInteractionEnabled = model.shouldAllowInteraction
         firstLabel.text = model.cellTitle
         secondLabel.text = model.cellData
+        secondLabel.numberOfLines = model.shouldOnlyBeOneLine ? 1 : 0
         thirdLabel.isHidden = model.cellFirstSubLabel == nil ? true : false
         thirdLabel.text = model.cellFirstSubLabel
         fourthLabel.isHidden = model.cellSecondSubLabel == nil ? true : false

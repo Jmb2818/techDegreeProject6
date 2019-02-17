@@ -54,4 +54,25 @@ class Formatter {
         
         return UserStrings.General.unknown.capitalized
     }
+    
+    static func returnMetricUnits(secondLabelText: String?) -> String? {
+        let secondLabelNoComma = secondLabelText?.filter({ $0 != "," })
+        let secondLabel = secondLabelNoComma?.filter( { !($0 == "i" ||  $0 == "n") })
+        
+        if let feet = secondLabel, let length = Double(feet) {
+            let meters = Measurement(value: length, unit: UnitLength.inches).converted(to: .meters).value
+            return "\(Formatter.formatToOneDecimal(meters))m"
+        }
+        return nil
+    }
+    
+    static func returnImperialUnits(secondLabelText: String?) -> String? {
+        let secondLabel = secondLabelText?.filter( { !($0 == "," || $0 == "m") })
+        
+        if let meters = secondLabel, let length = Double(meters) {
+            let feet = Measurement(value: length, unit: UnitLength.meters).converted(to: .inches).value
+            return "\(Formatter.formatToOneDecimal(feet))in"
+        }
+        return nil
+    }
 }

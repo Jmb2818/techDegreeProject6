@@ -10,4 +10,13 @@ import Foundation
 
 enum SWAPIError: Error {
     case generic
+    
+    
+    
+    var errorMessages: String {
+        switch self {
+        case .generic:
+            return "Sorry, an error has occured"
+        }
+    }
 }

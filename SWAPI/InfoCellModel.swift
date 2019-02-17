@@ -20,6 +20,7 @@ struct InfoCellModel {
     var cellSecondSubLabel: String? = nil
     var needsConstraintUpdate: Bool = false
     var shouldAllowInteraction: Bool = false
+    var shouldOnlyBeOneLine: Bool = false
     
     init(result: Result, indexPath: IndexPath, planet: Planet? = nil) {
         if let character = result as? Character {
@@ -36,24 +37,25 @@ struct InfoCellModel {
     private init(character: Character, indexPath: IndexPath, planet: Planet? = nil) {
         name = character.name.capitalizeTitle()
         switch indexPath.row {
-        case 0:
+        case CellIndexFor.bornOrMake.rawValue:
             cellTitle = CharacterStrings.born
             cellData = character.birth_year.capitalizeBirthYear()
-        case 1:
+        case CellIndexFor.costOrHome.rawValue:
             cellTitle = CharacterStrings.home
             cellData = planet?.name.capitalized ?? GeneralStrings.unknown.capitalized
             needsConstraintUpdate = true
-        case 2:
+        case CellIndexFor.length.rawValue:
             shouldAllowInteraction = true
+            shouldOnlyBeOneLine = true
             cellTitle = CharacterStrings.height
             cellData = Formatter.formatMetersFromString(string: character.height)
             let cellDataUnknown = cellData == GeneralStrings.unknown.capitalized
             cellFirstSubLabel = cellDataUnknown ? nil : GeneralStrings.english
             cellSecondSubLabel = cellDataUnknown ? nil : GeneralStrings.metric
-        case 3:
+        case CellIndexFor.classOrEyes.rawValue:
             cellTitle = CharacterStrings.eyes
             cellData = character.eye_color.capitalized
-        case 4:
+        case CellIndexFor.crewOrHair.rawValue:
             cellTitle = CharacterStrings.hair
             cellData = character.hair_color.capitalized
         default:
@@ -65,29 +67,31 @@ struct InfoCellModel {
     private init(starship: Starship, indexPath: IndexPath) {
         name = starship.name.capitalizeTitle()
         switch indexPath.row {
-        case 0:
+        case CellIndexFor.bornOrMake.rawValue:
             cellTitle = VehicleStrings.make
             cellData = starship.manufacturer.capitalized
             needsConstraintUpdate = true
-        case 1:
+        case CellIndexFor.costOrHome.rawValue:
             shouldAllowInteraction = true
+            shouldOnlyBeOneLine = true
             cellTitle = VehicleStrings.cost
             cellData = Formatter.formatNumberWithComma(starship.cost_in_credits.capitalized)
             let cellDataUnknown = cellData == UserStrings.General.unknown.capitalized
             cellFirstSubLabel = cellDataUnknown ? nil : GeneralStrings.usd
             cellSecondSubLabel = cellDataUnknown ? nil : GeneralStrings.credits
-        case 2:
+        case CellIndexFor.length.rawValue:
             shouldAllowInteraction = true
+            shouldOnlyBeOneLine = true
             cellTitle = VehicleStrings.length
             cellData = "\(Formatter.formatNumberWithComma(starship.length, withUnit: GeneralStrings.meters))"
             let cellDataUnknown = cellData == UserStrings.General.unknown.capitalized
             cellFirstSubLabel = cellDataUnknown ? nil : GeneralStrings.english
             cellSecondSubLabel = cellDataUnknown ? nil : GeneralStrings.metric
-        case 3:
+        case CellIndexFor.classOrEyes.rawValue:
             cellTitle = VehicleStrings.vehicleClass
             cellData = starship.starship_class.capitalized
             needsConstraintUpdate = true
-        case 4:
+        case CellIndexFor.crewOrHair.rawValue:
             cellTitle = VehicleStrings.crew
             cellData = starship.crew.capitalized
         default:
@@ -99,29 +103,31 @@ struct InfoCellModel {
     private init(vehicle: Vehicle, indexPath: IndexPath) {
         name = vehicle.name.capitalizeTitle()
         switch indexPath.row {
-        case 0:
+        case CellIndexFor.bornOrMake.rawValue:
             cellTitle = VehicleStrings.make
             cellData = vehicle.manufacturer.capitalized
             needsConstraintUpdate = true
-        case 1:
+        case CellIndexFor.costOrHome.rawValue:
             shouldAllowInteraction = true
+            shouldOnlyBeOneLine = true
             cellTitle = VehicleStrings.cost
             cellData = Formatter.formatNumberWithComma(vehicle.cost_in_credits.capitalized)
             let cellDataUnknown = cellData == UserStrings.General.unknown.capitalized
             cellFirstSubLabel = cellDataUnknown ? nil : GeneralStrings.usd
             cellSecondSubLabel = cellDataUnknown ? nil : GeneralStrings.credits
-        case 2:
+        case CellIndexFor.length.rawValue:
             shouldAllowInteraction = true
+            shouldOnlyBeOneLine = true
             cellTitle = VehicleStrings.length
             cellData = "\(Formatter.formatNumberWithComma(vehicle.length, withUnit: GeneralStrings.meters))"
             let cellDataUnknown = cellData == UserStrings.General.unknown.capitalized
             cellFirstSubLabel = cellDataUnknown ? nil : GeneralStrings.english
             cellSecondSubLabel = cellDataUnknown ? nil : GeneralStrings.metric
-        case 3:
+        case CellIndexFor.classOrEyes.rawValue:
             cellTitle = VehicleStrings.vehicleClass
             cellData = vehicle.vehicle_class.capitalized
             needsConstraintUpdate = true
-        case 4:
+        case CellIndexFor.crewOrHair.rawValue:
             cellTitle = VehicleStrings.crew
             cellData = vehicle.crew.capitalized
         default:
@@ -131,4 +137,12 @@ struct InfoCellModel {
     }
 
     
+}
+
+enum CellIndexFor: Int {
+    case bornOrMake = 0
+    case costOrHome = 1
+    case length = 2
+    case classOrEyes = 3
+    case crewOrHair = 4
 }
