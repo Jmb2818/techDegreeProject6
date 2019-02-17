@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailViewController = storyboard.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController {
             detailViewController.results = results
-            detailViewController.planets = planets ?? []
+            detailViewController.database = dataSource
             detailViewController.navigationItem.title = title
             self.navigationController?.pushViewController(detailViewController, animated: true)
         }

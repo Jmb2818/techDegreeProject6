@@ -93,4 +93,14 @@ class StarWarsDataSource {
             }
         }
     }
+    
+    func findHomeworld(character: Character) -> Planet? {
+        for planet in self.planets {
+            if planet.url == character.homeworld {
+                return planet
+            }
+        }
+        
+        return nil
+    }
 }

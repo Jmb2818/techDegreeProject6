@@ -26,6 +26,7 @@
 		0BB5E3822209589C00DEB528 /* UserStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E3812209589C00DEB528 /* UserStrings.swift */; };
 		0BB5E38422100B6000DEB528 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E38322100B6000DEB528 /* StringExtensions.swift */; };
 		0BB5E3882218D79200DEB528 /* SWDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E3872218D79100DEB528 /* SWDataSource.swift */; };
+		0BB5E38A2219C5FA00DEB528 /* InfoCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5E3892219C5FA00DEB528 /* InfoCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		0BB5E3812209589C00DEB528 /* UserStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStrings.swift; sourceTree = "<group>"; };
 		0BB5E38322100B6000DEB528 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		0BB5E3872218D79100DEB528 /* SWDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDataSource.swift; sourceTree = "<group>"; };
+		0BB5E3892219C5FA00DEB528 /* InfoCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				0BB5E3812209589C00DEB528 /* UserStrings.swift */,
 				0BB5E38322100B6000DEB528 /* StringExtensions.swift */,
 				0BB5E3872218D79100DEB528 /* SWDataSource.swift */,
+				0BB5E3892219C5FA00DEB528 /* InfoCellModel.swift */,
 			);
 			path = SWAPI;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BB5E38A2219C5FA00DEB528 /* InfoCellModel.swift in Sources */,
 				0B3C663621EEECE400F7EC20 /* Page.swift in Sources */,
 				0BB5E38422100B6000DEB528 /* StringExtensions.swift in Sources */,
 				0BB5E3882218D79200DEB528 /* SWDataSource.swift in Sources */,

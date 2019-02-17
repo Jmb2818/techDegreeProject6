@@ -11,8 +11,6 @@ import Foundation
 
 class InfoCell: UITableViewCell {
     
-    // 1 credit = $4.075
-    
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
@@ -25,28 +23,6 @@ class InfoCell: UITableViewCell {
         thirdLabel.isHidden = true
         fourthLabel.isHidden = true
         self.isUserInteractionEnabled = false
-    }
-    
-    func configureCell(with result: Result, row: Int, nameLabel: UILabel, planets: [Planet]? = nil) {
-        if let character = result as? Character {
-            guard let planets = planets else {return}
-            let planet = findHomeworld(character: character, planets: planets)
-            configureCharacterCells(character: character, row: row, nameLabel: nameLabel, planet: planet)
-        } else if let starship = result as? Starship {
-            configureStarshipCells(starship: starship, row: row, nameLabel: nameLabel)
-        } else if let vehicle = result as? Vehicle {
-            configureVehicleCells(vehicle: vehicle, row: row, nameLabel: nameLabel)
-        }
-    }
-    
-    func findHomeworld(character: Character, planets: [Planet]) -> Planet? {
-        for planet in planets {
-            if planet.url == character.homeworld {
-                return planet
-            }
-        }
-        
-        return nil
     }
     
     func configureMoney(conversionRate: Int) {
@@ -105,119 +81,19 @@ class InfoCell: UITableViewCell {
             self.secondLabel.text = "\(Formatter.formatToOneDecimal(feet))in"
         }
     }
-
     
-    func configureCharacterCells(character: Character, row: Int, nameLabel: UILabel, planet: Planet?) {
-        // TODO: Give the cell a model and have it init with each number but name the variables the same
-        // so firstLabel.text = model.name, firstLabel.text = model.firstCellLabel
-        nameLabel.text = character.name.capitalizeTitle()
-        switch row {
-        case 0:
-            firstLabel.text = "Born"
-            secondLabel.text = character.birth_year.capitalizeBirthYear()
-        case 1:
-            firstLabel.text = "Home"
+    func configureCell(model: InfoCellModel) {
+        isUserInteractionEnabled = model.shouldAllowInteraction
+        firstLabel.text = model.cellTitle
+        secondLabel.text = model.cellData
+        thirdLabel.isHidden = model.cellFirstSubLabel == nil ? true : false
+        thirdLabel.text = model.cellFirstSubLabel
+        fourthLabel.isHidden = model.cellSecondSubLabel == nil ? true : false
+        fourthLabel.text = model.cellSecondSubLabel
+        thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
+        fourthLabel.textColor = .white
+        if model.needsConstraintUpdate {
             updateConstraintForFullTitle()
-            secondLabel.text = planet?.name.capitalized ?? "Unknown"
-        case 2:
-            isUserInteractionEnabled = true
-            firstLabel.text = "Height"
-            secondLabel.text = Formatter.formatMetersFromString(string: character.height)
-            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            thirdLabel.text = "English"
-            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            fourthLabel.text = "Metric"
-            thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            fourthLabel.textColor = .white
-        case 3:
-            firstLabel.text = "Eyes"
-            secondLabel.text = character.eye_color.capitalized
-        case 4:
-            firstLabel.text = "Hair"
-            secondLabel.text = character.hair_color.capitalized
-        default:
-            break
-        }
-    }
-    
-    func configureStarshipCells(starship: Starship, row: Int, nameLabel: UILabel) {
-        nameLabel.text = starship.name.capitalizeTitle()
-        switch row {
-        case 0:
-            firstLabel.text = "Make"
-            updateConstraintForFullTitle()
-            secondLabel.text = starship.manufacturer.capitalized
-        case 1:
-            isUserInteractionEnabled = true
-            firstLabel.text = "Cost"
-            secondLabel.numberOfLines = 1
-            secondLabel.text = Formatter.formatNumberWithComma(starship.cost_in_credits.capitalized)
-            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            thirdLabel.text = "USD"
-            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            fourthLabel.text = "Credits"
-            thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            fourthLabel.textColor = .white
-        case 2:
-            isUserInteractionEnabled = true
-            firstLabel.text = "Length"
-            secondLabel.text = "\(Formatter.formatNumberWithComma(starship.length, withUnit: "m"))"
-            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            thirdLabel.text = "English"
-            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            fourthLabel.text = "Metric"
-            thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            fourthLabel.textColor = .white
-        case 3:
-            firstLabel.text = "Class"
-            updateConstraintForFullTitle()
-            secondLabel.text = starship.starship_class.capitalized
-        case 4:
-            firstLabel.text = "Crew"
-            secondLabel.text = starship.crew.capitalized
-        default:
-            break
-        }
-    }
-    
-    func configureVehicleCells(vehicle: Vehicle, row: Int, nameLabel: UILabel) {
-        // TODO: Maybe use codable keys to rename vars so that you can be more generic with name, length, url
-        nameLabel.text = vehicle.name.capitalizeTitle()
-        switch row {
-        case 0:
-            firstLabel.text = "Make"
-            updateConstraintForFullTitle()
-            secondLabel.text = vehicle.manufacturer.capitalized
-        case 1:
-            isUserInteractionEnabled = true
-            firstLabel.text = "Cost"
-            secondLabel.numberOfLines = 1
-            secondLabel.text = Formatter.formatNumberWithComma(vehicle.cost_in_credits.capitalized)
-            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            thirdLabel.text = "USD"
-            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            fourthLabel.text = "Credits"
-            thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            fourthLabel.textColor = .white
-        case 2:
-            isUserInteractionEnabled = true
-            firstLabel.text = "Length"
-            secondLabel.text = "\(Formatter.formatNumberWithComma(vehicle.length, withUnit: "m"))"
-            thirdLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            thirdLabel.text = "English"
-            fourthLabel.isHidden = secondLabel.text != "Unknown" ? false : true
-            fourthLabel.text = "Metric"
-            thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
-            fourthLabel.textColor = .white
-        case 3:
-            firstLabel.text = "Class"
-            updateConstraintForFullTitle()
-            secondLabel.text = vehicle.vehicle_class.capitalized
-        case 4:
-            firstLabel.text = "Crew"
-            secondLabel.text = vehicle.crew
-        default:
-            break
         }
     }
     

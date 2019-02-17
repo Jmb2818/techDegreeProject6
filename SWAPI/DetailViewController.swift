@@ -10,11 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var results: [Result] = []
-    var characters: [Character] = []
-    var vehicles: [Vehicle] = []
-    var starships: [Starship] = []
-    var planets: [Planet] = []
     var selectedResult: Result?
+    weak var database: StarWarsDataSource?
     
     @IBOutlet weak var pickerView: UIPickerView!
     
@@ -53,6 +50,13 @@ class DetailViewController: UIViewController {
             smallestCharacter.text = sortedStarshipsWithoutUnknown.last?.name
         }
     }
+    
+    func findHomeWorldIfPossible(result: Result) -> Planet? {
+        if let character = result as? Character {
+            return database?.findHomeworld(character: character)
+        }
+        return nil
+    }
 }
 
 extension DetailViewController: UITableViewDataSource {
@@ -69,10 +73,17 @@ extension DetailViewController: UITableViewDataSource {
         let tableViewHeight = tableView.bounds.height
         
         tableView.rowHeight = (tableViewHeight/5)
+        
         if let result = selectedResult {
-            cell.configureCell(with: result, row: indexPath.row, nameLabel: nameLabel, planets: planets)
+            let planet = findHomeWorldIfPossible(result: result)
+            let model = InfoCellModel(result: result, indexPath: indexPath, planet: planet)
+            nameLabel.text = model.name
+            cell.configureCell(model: model)
         } else {
-            cell.configureCell(with: results[0], row: indexPath.row, nameLabel: nameLabel, planets: planets)
+            let planet = findHomeWorldIfPossible(result: results[0])
+            let model = InfoCellModel(result: results[0], indexPath: indexPath, planet: planet)
+            nameLabel.text = model.name
+            cell.configureCell(model: model)
         }
         if (!cell.thirdLabel.isHidden || !cell.fourthLabel.isHidden) && indexPath.row == 1 {
             conversionTitle.isHidden = false
