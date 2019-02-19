@@ -22,7 +22,7 @@ struct InfoCellModel {
     var shouldAllowInteraction: Bool = false
     var shouldOnlyBeOneLine: Bool = false
     
-    init(result: Result, indexPath: IndexPath, planet: Planet? = nil) {
+    init(result: StarWarsObject, indexPath: IndexPath, planet: Planet? = nil) {
         if let character = result as? Character {
             self.init(character: character, indexPath: indexPath, planet: planet)
         } else if let starship = result as? Starship {
@@ -43,7 +43,6 @@ struct InfoCellModel {
         case CellIndexFor.costOrHome.rawValue:
             cellTitle = CharacterStrings.home
             cellData = planet?.name.capitalized ?? GeneralStrings.unknown.capitalized
-            needsConstraintUpdate = true
         case CellIndexFor.length.rawValue:
             shouldAllowInteraction = true
             shouldOnlyBeOneLine = true

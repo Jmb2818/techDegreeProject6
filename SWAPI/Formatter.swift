@@ -77,19 +77,19 @@ class Formatter {
     }
     
     static func convertToUSD(secondLabelText: String?, conversionRate: Int) -> String? {
-        let secondLabel = secondLabelText?.filter( { !($0 == "," || $0 == "$") })
-        if let cost = secondLabel, let credits = Int(cost) {
-            let costInCreditsString = String(credits/conversionRate)
-            return "\(Formatter.formatNumberWithComma(costInCreditsString))"
+        let secondLabel = secondLabelText?.filter( { $0 != ","})
+        if let cost = secondLabel, let dollars = Int(cost) {
+            let costInDollarsString = String(dollars * conversionRate)
+            return "$\(Formatter.formatNumberWithComma(costInDollarsString))"
         }
         return nil
     }
     
     static func convertToCredits(secondLabelText: String?, conversionRate: Int) -> String? {
-        let secondLabel = secondLabelText?.filter( { $0 != ","})
-        if let cost = secondLabel, let dollars = Int(cost) {
-            let costInDollarsString = String(dollars * conversionRate)
-            return "$\(Formatter.formatNumberWithComma(costInDollarsString))"
+        let secondLabel = secondLabelText?.filter( { !($0 == "," || $0 == "$") })
+        if let cost = secondLabel, let credits = Int(cost) {
+            let costInCreditsString = String(credits/conversionRate)
+            return "\(Formatter.formatNumberWithComma(costInCreditsString))"
         }
         return nil
     }

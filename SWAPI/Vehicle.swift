@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Vehicle: Result, Codable, Hashable {
+struct Vehicle: StarWarsObject, Codable, Hashable {
     let name: String
     let manufacturer: String
     let cost_in_credits: String

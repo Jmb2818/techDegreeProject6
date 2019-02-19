@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         starshipButton.isEnabled = false
     }
     
-    func displayDetailView(results: [Result] = [], title: String, planets: [Planet]? = nil) {
+    func displayDetailView(results: [StarWarsObject] = [], title: String, planets: [Planet]? = nil) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailViewController = storyboard.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController {
             detailViewController.results = results
@@ -54,14 +54,20 @@ class ViewController: UIViewController {
             self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.characters, planets: self.dataSource.allPlanets)
             return
         }
-        dataSource.getCharacters(url: "https://swapi.co/api/people/") { [weak self] characters, error in
-            if let characters = self?.dataSource.allCharacters {
-                self?.dataSource.getPlanets(url: "https://swapi.co/api/planets/") { [weak self] planets, error in
-                    if let planets = self?.dataSource.allPlanets {
+        dataSource.getCharacters(url: "https://swapi.co/api/people/") { [weak self] result in
+            switch result {
+            case .success(let characterResults):
+                self?.dataSource.getPlanets(url: "https://swapi.co/api/planets/") { [weak self] result in
+                    switch result {
+                    case .success(let planetResults):
                         self?.activityIndicator.stopAnimating()
-                        self?.displayDetailView(results: characters, title: UserStrings.General.characters, planets: planets)
+                        self?.displayDetailView(results: Array(characterResults), title: UserStrings.General.characters, planets: Array(planetResults))
+                    case .failure(let error):
+                        print(error)
                     }
                 }
+            case .failure(let error):
+                print(error)
             }
         }
     }
@@ -73,10 +79,13 @@ class ViewController: UIViewController {
             self.displayDetailView(results: self.dataSource.allVehicles, title: UserStrings.General.vehicles)
             return
         }
-        dataSource.getVehicles(url: "https://swapi.co/api/vehicles/") { [weak self] vehicles, error in
-            if let vehicles = self?.dataSource.allVehicles {
+        dataSource.getVehicles(url: "https://swapi.co/api/vehicles/") { [weak self] result in
+            switch result {
+            case .success(let vehicleResults):
                 self?.activityIndicator.stopAnimating()
-                self?.displayDetailView(results: vehicles, title: UserStrings.General.vehicles)
+                self?.displayDetailView(results: Array(vehicleResults), title: UserStrings.General.vehicles)
+            case .failure(let error):
+                print(error)
             }
         }
 
@@ -89,10 +98,13 @@ class ViewController: UIViewController {
             self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.starships)
             return
         }
-        dataSource.getStarships(url: "https://swapi.co/api/starships/") { [weak self] starships, error in
-            if let starships = self?.dataSource.allStarships {
+        dataSource.getStarships(url: "https://swapi.co/api/starships/") { [weak self] result in
+            switch result {
+            case .success(let starshipResults):
                 self?.activityIndicator.stopAnimating()
-                self?.displayDetailView(results: starships, title: UserStrings.General.starships)
+                self?.displayDetailView(results: Array(starshipResults), title: UserStrings.General.starships)
+            case .failure(let error):
+                print(error)
             }
         }
     }

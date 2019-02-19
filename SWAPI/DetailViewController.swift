@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
-    var results: [Result] = []
-    var selectedResult: Result?
+class DetailViewController: UIViewController, NotificationPostable {
+    var results: [StarWarsObject] = []
+    var selectedResult: StarWarsObject?
     weak var database: StarWarsDataSource?
     
     @IBOutlet weak var pickerView: UIPickerView!
@@ -31,8 +31,7 @@ class DetailViewController: UIViewController {
         conversionTextField.text = "1"
     }
     
-    func sortObjectsBySize(results: [Result]) {
-        //TODO: fix with sync class and database class
+    func sortObjectsBySize(results: [StarWarsObject]) {
         if let characterResults = results as? [Character] {
             let sortedCharacters = characterResults.sorted(by: { $0.heightAsInt > $1.heightAsInt })
             let sortedCharactersWithoutUnknown = sortedCharacters.filter { $0.heightAsInt != 0 }
@@ -51,7 +50,7 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func findHomeWorldIfPossible(result: Result) -> Planet? {
+    func findHomeWorldIfPossible(result: StarWarsObject) -> Planet? {
         if let character = result as? Character {
             return database?.findHomeworld(character: character)
         }

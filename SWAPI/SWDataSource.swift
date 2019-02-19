@@ -50,46 +50,70 @@ class StarWarsDataSource {
     }
     
     
-    func getCharacters(url: String?, completionHandler completion: @escaping (Set<Character>?, Error?) -> Void) {
-        client.getCharacterResults(absoluteString: url) { [weak self] results, error in
-            if self?.characters.count != results?.count, let _results = results {
-                _ = _results.results.map({ self?.characters.insert($0)})
-                self?.getCharacters(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.characters, error)
+    func getCharacters(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Character>>) {
+        client.getCharacterResults(absoluteString: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let results):
+                _ = results.results.map({ self.characters.insert($0)})
+                if self.characters.count != results.count {
+                    self.getCharacters(url: results.next, completionHandler: completion)
+                } else {
+                    completion(.success(self.characters))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
     
-    func getVehicles(url: String?, completionHandler completion: @escaping (Set<Vehicle>?, Error?) -> Void) {
-        client.getVehicleResults(absoluteString: url) { [weak self] results, error in
-            if self?.vehicles.count != results?.count , let _results = results {
-                _ = _results.results.map({ self?.vehicles.insert($0)})
-                self?.getVehicles(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.vehicles, error)
+    func getVehicles(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Vehicle>>) {
+        client.getVehicleResults(absoluteString: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let results):
+                _ = results.results.map({ self.vehicles.insert($0)})
+                if self.vehicles.count != results.count {
+                    self.getVehicles(url: results.next, completionHandler: completion)
+                } else {
+                    completion(.success(self.vehicles))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
     
-    func getStarships(url: String?, completionHandler completion: @escaping (Set<Starship>?, Error?) -> Void) {
-        client.getStarshipResults(absoluteString: url) { [weak self] results, error in
-            if self?.starships.count != results?.count, let _results = results {
-                _ = _results.results.map({ self?.starships.insert($0)})
-                self?.getStarships(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.starships, error)
+    func getStarships(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Starship>>) {
+        client.getStarshipResults(absoluteString: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let results):
+                _ = results.results.map({ self.starships.insert($0)})
+                if self.starships.count != results.count {
+                    self.getStarships(url: results.next, completionHandler: completion)
+                } else {
+                    completion(.success(self.starships))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
     
-    func getPlanets(url: String?, completionHandler completion: @escaping (Set<Planet>?, Error?) -> Void) {
-        client.getPlanetResults(absoluteString: url) { [weak self] results, error in
-            if self?.planets.count != results?.count, let _results = results {
-                _ = _results.results.map({ self?.planets.insert($0)})
-                self?.getPlanets(url: results?.next, completionHandler: completion)
-            } else {
-                completion(self?.planets, error)
+    func getPlanets(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Planet>>) {
+        client.getPlanetResults(absoluteString: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let results):
+                _ = results.results.map({ self.planets.insert($0)})
+                if self.planets.count != results.count {
+                    self.getPlanets(url: results.next, completionHandler: completion)
+                } else {
+                    completion(.success(self.planets))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

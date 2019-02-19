@@ -22,10 +22,9 @@ class SWAPIClient {
         self.init(configuration: .default)
     }
     
-    
-    func getCharacterResults(absoluteString: String?, completionHandler completion: @escaping (Page<Character>?, Error?) -> Void) {
+    func getCharacterResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Character>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(nil, SWAPIError.generic)
+            completion(.failure(SWAPIError.generic))
             return
         }
         
@@ -34,9 +33,9 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    func getVehicleResults(absoluteString: String?, completionHandler completion: @escaping (Page<Vehicle>?, Error?) -> Void) {
+    func getVehicleResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Vehicle>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(nil, SWAPIError.generic)
+            completion(.failure(SWAPIError.generic))
             return
         }
         
@@ -45,9 +44,9 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    func getStarshipResults(absoluteString: String?, completionHandler completion: @escaping (Page<Starship>?, Error?) -> Void) {
+    func getStarshipResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Starship>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(nil, SWAPIError.generic)
+            completion(.failure(SWAPIError.generic))
             return
         }
         
@@ -56,9 +55,9 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    func getPlanetResults(absoluteString: String?, completionHandler completion: @escaping (Page<Planet>?, Error?) -> Void) {
+    func getPlanetResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Planet>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(nil, SWAPIError.generic)
+            completion(.failure(SWAPIError.generic))
             return
         }
         
@@ -67,26 +66,26 @@ class SWAPIClient {
         requestCodableObject(request: request, completionHandler: completion)
     }
     
-    private func requestCodableObject<T: Codable>(request: URLRequest, completionHandler completion: @escaping (T?, Error?) -> Void) {
+    private func requestCodableObject<T: Codable>(request: URLRequest, completionHandler completion: @escaping ResultCompletion<T>) {
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
                     guard let httpResponse = response as? HTTPURLResponse else {
-                        completion(nil, SWAPIError.generic)
+                        completion(.failure(SWAPIError.generic))
                         return
                     }
                     if httpResponse.statusCode == 200 {
                         do {
                             let results = try self.decoder.decode(T.self, from: data)
-                            completion(results, nil)
+                            completion(.success(results))
                         } catch let error {
-                            completion(nil, error)
+                            completion(.failure(error))
                         }
                     } else {
-                        completion(nil, SWAPIError.generic)
+                        completion(.failure(SWAPIError.generic))
                     }
                 } else if let error = error {
-                    completion(nil, error)
+                    completion(.failure(error))
                 }
             }
         }

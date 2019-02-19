@@ -9,6 +9,10 @@
 import Foundation
 
 class UserStrings {
+    enum Error {
+        static let okTitle = "Ok"
+    }
+    
     enum General {
         static let unknown = "unknown"
         static let characters = "Characters"

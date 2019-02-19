@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Character: Result, Codable, Hashable {
+struct Character: StarWarsObject, Codable, Hashable {
     let name: String
     let height: String
     let mass: String
