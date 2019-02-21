@@ -299,6 +299,7 @@
                                                     <outlet property="firstLabel" destination="Ll1-rE-Pwb" id="fCW-rE-mCd"/>
                                                     <outlet property="fourthLabel" destination="6yh-jL-Smm" id="na3-QR-ihq"/>
                                                     <outlet property="secondLabel" destination="TSY-t1-f7x" id="f15-gk-eb1"/>
+                                                    <outlet property="secondLabelConstraint" destination="18B-3O-uGC" id="fm4-Mz-eiv"/>
                                                     <outlet property="thirdLabel" destination="gPg-Pe-q66" id="0oX-cg-DvT"/>
                                                 </connections>
                                             </tableViewCell>

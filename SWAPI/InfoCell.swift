@@ -15,7 +15,8 @@ class InfoCell: UITableViewCell {
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
     @IBOutlet weak var fourthLabel: UILabel!
-
+    @IBOutlet weak var secondLabelConstraint: NSLayoutConstraint!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,10 +67,15 @@ class InfoCell: UITableViewCell {
         fourthLabel.textColor = .white
         if model.needsConstraintUpdate {
             updateConstraintForFullTitle()
+        } else {
+           thirdLabel.leadingAnchor.constraint(greaterThanOrEqualTo: secondLabel.trailingAnchor, constant: 10).isActive = true
         }
     }
     
     func updateConstraintForFullTitle() {
+        if secondLabelConstraint != nil {
+            secondLabelConstraint.isActive = false
+        }
         secondLabel.trailingAnchor.constraint(equalTo: fourthLabel.trailingAnchor, constant: 0).isActive = true
     }
 }
