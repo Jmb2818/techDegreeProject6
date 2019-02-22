@@ -24,7 +24,7 @@ class SWAPIClient {
     
     func getCharacterResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Character>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(.failure(SWAPIError.generic))
+            completion(.failure(SWAPIError.invalidURL))
             return
         }
         
@@ -35,7 +35,7 @@ class SWAPIClient {
     
     func getVehicleResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Vehicle>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(.failure(SWAPIError.generic))
+            completion(.failure(SWAPIError.invalidURL))
             return
         }
         
@@ -46,7 +46,7 @@ class SWAPIClient {
     
     func getStarshipResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Starship>>) {
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
-            completion(.failure(SWAPIError.generic))
+            completion(.failure(SWAPIError.invalidURL))
             return
         }
         
@@ -71,21 +71,21 @@ class SWAPIClient {
             DispatchQueue.main.async {
                 if let data = data {
                     guard let httpResponse = response as? HTTPURLResponse else {
-                        completion(.failure(SWAPIError.generic))
+                        completion(.failure(SWAPIError.invalidHTTPResponse))
                         return
                     }
                     if httpResponse.statusCode == 200 {
                         do {
                             let results = try self.decoder.decode(T.self, from: data)
                             completion(.success(results))
-                        } catch let error {
-                            completion(.failure(error))
+                        } catch {
+                            completion(.failure(SWAPIError.unableToParse))
                         }
                     } else {
-                        completion(.failure(SWAPIError.generic))
+                        completion(.failure(SWAPIError.invalidStatusCode(httpResponse.statusCode)))
                     }
-                } else if let error = error {
-                    completion(.failure(error))
+                } else {
+                    completion(.failure(SWAPIError.unableToRetrieveData))
                 }
             }
         }
