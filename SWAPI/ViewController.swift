@@ -10,32 +10,27 @@ import UIKit
 
 class ViewController: UIViewController, NotificationPostable {
 
-    @IBOutlet weak var characterButton: UIButton!
-    @IBOutlet weak var vehicleButton: UIButton!
-
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var starshipButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let dataSource = StarWarsDataSource()
+    var categoryCount: Int = 3
+    let loadingIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.addSubview(loadingIndicator)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.center = view.center
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
-        vehicleButton.isEnabled = true
-        characterButton.isEnabled = true
-        starshipButton.isEnabled = true
     }
     
     func load() {
-        activityIndicator.startAnimating()
-        vehicleButton.isEnabled = false
-        characterButton.isEnabled = false
-        starshipButton.isEnabled = false
+        loadingIndicator.startAnimating()
+        //TODO: Fix still being able to click cells
     }
     
     func displayDetailView(results: [StarWarsObject] = [], title: String, planets: [Planet]? = nil) {
@@ -47,79 +42,15 @@ class ViewController: UIViewController, NotificationPostable {
             self.navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
+    
+}
 
-    @IBAction func charactersSelected(_ sender: UIButton) {
-        load()
-        guard !dataSource.hasCharacters && !dataSource.hasPlanets else {
-            self.activityIndicator.stopAnimating()
-            self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.characters, planets: self.dataSource.allPlanets)
-            return
-        }
-        dataSource.getCharacters(url: "https://swapi.co/api/people/") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let characterResults):
-                self.dataSource.getPlanets(url: "https://swapi.co/api/planets/") { [weak self] result in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success(let planetResults):
-                        self.activityIndicator.stopAnimating()
-                        self.displayDetailView(results: Array(characterResults), title: UserStrings.General.characters, planets: Array(planetResults))
-                    case .failure(let error):
-                        if let swError = error as? SWAPIError {
-                            self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
-                        } else {
-                            self.presentAlert(from: self, title: SWAPIError.generic.errorTitle, message: SWAPIError.generic.errorMessages)
-                        }
-                    }
-                }
-            case .failure(let error):
-                if let swError = error as? SWAPIError {
-                    self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
-                } else {
-                    self.presentAlert(from: self, title: SWAPIError.generic.errorTitle, message: SWAPIError.generic.errorMessages)
-                }
-            }
-        }
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let containerSize = collectionView.frame.size
+        let height = containerSize.height/CGFloat(categoryCount)
+        return CGSize(width: containerSize.width, height: height)
     }
-    
-    @IBAction func vehiclesSelected(_ sender: UIButton) {
-        load()
-        guard !dataSource.hasVehicles else {
-            self.activityIndicator.stopAnimating()
-            self.displayDetailView(results: self.dataSource.allVehicles, title: UserStrings.General.vehicles)
-            return
-        }
-        dataSource.getVehicles(url: "https://swapi.co/api/vehicles/") { [weak self] result in
-            switch result {
-            case .success(let vehicleResults):
-                self?.activityIndicator.stopAnimating()
-                self?.displayDetailView(results: Array(vehicleResults), title: UserStrings.General.vehicles)
-            case .failure(let error):
-                print(error)
-            }
-        }
-
-    }
-    
-    @IBAction func starshipsSelected(_ sender: UIButton) {
-        load()
-        guard !dataSource.hasStarships else {
-            self.activityIndicator.stopAnimating()
-            self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.starships)
-            return
-        }
-        dataSource.getStarships(url: "https://swapi.co/api/starships/") { [weak self] result in
-            switch result {
-            case .success(let starshipResults):
-                self?.activityIndicator.stopAnimating()
-                self?.displayDetailView(results: Array(starshipResults), title: UserStrings.General.starships)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -144,7 +75,7 @@ extension ViewController: UICollectionViewDelegate {
         case 0:
             load()
             guard !dataSource.hasCharacters && !dataSource.hasPlanets else {
-                self.activityIndicator.stopAnimating()
+                self.loadingIndicator.stopAnimating()
                 self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.characters, planets: self.dataSource.allPlanets)
                 return
             }
@@ -156,7 +87,7 @@ extension ViewController: UICollectionViewDelegate {
                         guard let self = self else { return }
                         switch result {
                         case .success(let planetResults):
-                            self.activityIndicator.stopAnimating()
+                            self.loadingIndicator.startAnimating()
                             self.displayDetailView(results: Array(characterResults), title: UserStrings.General.characters, planets: Array(planetResults))
                         case .failure(let error):
                             if let swError = error as? SWAPIError {
@@ -167,43 +98,44 @@ extension ViewController: UICollectionViewDelegate {
                         }
                     }
                 case .failure(let error):
-                    if let swError = error as? SWAPIError {
-                        self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
-                    } else {
-                        self.presentAlert(from: self, title: SWAPIError.generic.errorTitle, message: SWAPIError.generic.errorMessages)
-                    }
+                     let swError = (error as? SWAPIError) ?? SWAPIError.generic
+                    self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
                 }
             }
         case 1:
             load()
             guard !dataSource.hasVehicles else {
-                self.activityIndicator.stopAnimating()
+                self.loadingIndicator.stopAnimating()
                 self.displayDetailView(results: self.dataSource.allVehicles, title: UserStrings.General.vehicles)
                 return
             }
             dataSource.getVehicles(url: "https://swapi.co/api/vehicles/") { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let vehicleResults):
-                    self?.activityIndicator.stopAnimating()
-                    self?.displayDetailView(results: Array(vehicleResults), title: UserStrings.General.vehicles)
+                    self.loadingIndicator.stopAnimating()
+                    self.displayDetailView(results: Array(vehicleResults), title: UserStrings.General.vehicles)
                 case .failure(let error):
-                    print(error)
+                    let swError = (error as? SWAPIError) ?? SWAPIError.generic
+                    self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
                 }
             }
         case 2:
             load()
             guard !dataSource.hasStarships else {
-                self.activityIndicator.stopAnimating()
+                self.loadingIndicator.stopAnimating()
                 self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.starships)
                 return
             }
             dataSource.getStarships(url: "https://swapi.co/api/starships/") { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let starshipResults):
-                    self?.activityIndicator.stopAnimating()
-                    self?.displayDetailView(results: Array(starshipResults), title: UserStrings.General.starships)
+                    self.loadingIndicator.stopAnimating()
+                    self.displayDetailView(results: Array(starshipResults), title: UserStrings.General.starships)
                 case .failure(let error):
-                    print(error)
+                    let swError = (error as? SWAPIError) ?? SWAPIError.generic
+                    self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
                 }
             }
         default:
