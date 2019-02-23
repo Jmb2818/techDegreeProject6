@@ -44,7 +44,7 @@ enum SWAPIError: Error {
         case .unableToParse:
             return "Unable to parse data obtained from the network call. Please try again"
         case .invalidConversionRate:
-            return "The conversion rate is not between greater than 0. Please try again."
+            return "The conversion rate must be a number greater than zero. Please try again."
         case .invalidHTTPResponse:
             return "Invalid HTTP response from network call. Please try again."
         case .invalidStatusCode:

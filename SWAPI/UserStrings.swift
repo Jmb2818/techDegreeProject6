@@ -23,6 +23,7 @@ class UserStrings {
         static let metric = "Metric"
         static let usd = "USD"
         static let credits = "Credits"
+        static let one = "1"
     }
     
     enum Character {

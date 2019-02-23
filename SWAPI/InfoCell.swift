@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class InfoCell: UITableViewCell {
+class InfoCell: UITableViewCell, NotificationPostable {
     
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!

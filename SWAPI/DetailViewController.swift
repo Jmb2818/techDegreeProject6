@@ -98,8 +98,9 @@ extension DetailViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? InfoCell else { return }
         if indexPath.row == 1 {
             guard let conversionRateString = conversionTextField.text,
-                let conversionRate = Int(conversionRateString)
-                else {
+                let conversionRate = Int(conversionRateString),
+                conversionRate > 0 else {
+                    presentAlert(from: self, title: SWAPIError.invalidConversionRate.errorTitle, message: SWAPIError.invalidConversionRate.errorMessages)
                     cell.configureMoney(conversionRate: 1)
                     return
             }
