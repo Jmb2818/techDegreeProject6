@@ -134,3 +134,13 @@ extension DetailViewController: UIPickerViewDelegate {
         conversionTextField.isHidden = true
     }
 }
+
+extension DetailViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
+
