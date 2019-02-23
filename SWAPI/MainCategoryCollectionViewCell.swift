@@ -23,7 +23,7 @@ class MainCategoryCollectionViewCell: UICollectionViewCell {
             categoryLabel.text = UserStrings.General.vehicles.capitalized
         case 2:
             categoryImageView.image = #imageLiteral(resourceName: "starship")
-            categoryLabel.text = UserStrings.General.vehicles.capitalized
+            categoryLabel.text = UserStrings.General.starships.capitalized
         default:
             break
         }

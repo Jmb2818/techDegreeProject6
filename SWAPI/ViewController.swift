@@ -25,11 +25,13 @@ class ViewController: UIViewController, NotificationPostable {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        collectionView.isUserInteractionEnabled = true
     }
     
     private func load() {
         loadingIndicator.startAnimating()
         //TODO: Fix still being able to click cells
+        collectionView.isUserInteractionEnabled = false
     }
     
     private func displayDetailView(results: [StarWarsObject] = [], title: String, planets: [Planet]? = nil) {
@@ -95,7 +97,7 @@ class ViewController: UIViewController, NotificationPostable {
     private func fetchStarchips() {
         guard !dataSource.hasStarships else {
             self.loadingIndicator.stopAnimating()
-            self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.starships)
+            self.displayDetailView(results: self.dataSource.allStarships, title: UserStrings.General.starships)
             return
         }
         dataSource.getStarships(url: "https://swapi.co/api/starships/") { [weak self] result in
