@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController, NotificationPostable {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let dataSource = StarWarsDataSource()
     var categoryCount: Int = 3
