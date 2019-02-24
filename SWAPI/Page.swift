@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Model for each page of the API
 struct Page<T: Codable>: Codable {
     var results: [T]
     let count: Int

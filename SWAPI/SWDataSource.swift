@@ -8,9 +8,10 @@
 
 import Foundation
 
+// Class to hold data retrieved from the API
 class StarWarsDataSource {
     
-
+    // MARK: Properties
     private var characters = Set<Character>()
     private var vehicles = Set<Vehicle>()
     private var starships = Set<Starship>()
@@ -57,8 +58,9 @@ class StarWarsDataSource {
         return sortedObjectArray
     }
     
-    
+    // MARK: Helper Functions
     func getCharacters(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Character>>) {
+        // Get characters from the API
         client.getCharacterResults(absoluteString: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -76,6 +78,7 @@ class StarWarsDataSource {
     }
     
     func getVehicles(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Vehicle>>) {
+        // Get vehicles from the API
         client.getVehicleResults(absoluteString: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -93,6 +96,7 @@ class StarWarsDataSource {
     }
     
     func getStarships(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Starship>>) {
+        // Get starships from the API
         client.getStarshipResults(absoluteString: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -110,6 +114,7 @@ class StarWarsDataSource {
     }
     
     func getPlanets(url: String?, completionHandler completion: @escaping ResultCompletion<Set<Planet>>) {
+        // Get planets from the API
         client.getPlanetResults(absoluteString: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -127,6 +132,7 @@ class StarWarsDataSource {
     }
     
     func findHomeworld(character: Character) -> Planet? {
+        // Find homeworld from the character's homeworld
         for planet in self.planets {
             if planet.url == character.homeworld {
                 return planet

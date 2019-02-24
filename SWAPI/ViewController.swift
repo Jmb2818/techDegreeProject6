@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, NotificationPostable {
     
+    // MARK: IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: Properties
     private let dataSource = StarWarsDataSource()
     private var categoryCount: Int = 3
     private let loadingIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -30,24 +32,30 @@ class ViewController: UIViewController, NotificationPostable {
         collectionView.isUserInteractionEnabled = true
     }
     
+    // MARK: Helper Functions
     private func load() {
+        // Show blur and start activity indicator
         blurView.isHidden = false
         loadingIndicator.startAnimating()
         collectionView.isUserInteractionEnabled = false
     }
     
     private func addBlurView() {
+        // Add blur view to the view behind activity indicator
         blurView.frame = view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurView)
         blurView.isHidden = true
     }
     private func reset() {
+        // In case of error reset view
         blurView.isHidden = true
+        loadingIndicator.stopAnimating()
         collectionView.isUserInteractionEnabled = true
     }
     
     private func displayDetailView(results: [StarWarsObject] = [], title: String, planets: [Planet]? = nil) {
+        // Display DetailViewController with the selected result and planets if there are any
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailViewController = storyboard.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController {
             detailViewController.results = results
@@ -58,6 +66,7 @@ class ViewController: UIViewController, NotificationPostable {
     }
     
     private func fetchCharacters () {
+        // Fetch characters and planets from the API if there are none already in the datasource
         guard !dataSource.hasCharacters && !dataSource.hasPlanets else {
             self.loadingIndicator.stopAnimating()
             self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.characters, planets: self.dataSource.allPlanets)
@@ -91,6 +100,7 @@ class ViewController: UIViewController, NotificationPostable {
     }
     
     private func fetchVehicles() {
+        // Fetch vehicles from the API if there are none already in the datasource
         guard !dataSource.hasVehicles else {
             self.loadingIndicator.stopAnimating()
             self.displayDetailView(results: self.dataSource.allVehicles, title: UserStrings.General.vehicles)
@@ -113,6 +123,7 @@ class ViewController: UIViewController, NotificationPostable {
     }
     
     private func fetchStarchips() {
+        // Fetch starships from the API if there are none already in the datasource
         guard !dataSource.hasStarships else {
             self.loadingIndicator.stopAnimating()
             self.displayDetailView(results: self.dataSource.allStarships, title: UserStrings.General.starships)
@@ -135,6 +146,7 @@ class ViewController: UIViewController, NotificationPostable {
     }
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let containerSize = collectionView.frame.size
@@ -143,9 +155,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: UICollectionViewDataSource
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return categoryCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -157,6 +170,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: UICollectionViewDelegate
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         load()

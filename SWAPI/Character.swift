@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Model for a character that adheres to codable
 struct Character: StarWarsObject, Codable, Hashable {
     let name: String
     let height: String

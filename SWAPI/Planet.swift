@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Model for a planet that adheres to codable
 struct Planet: Codable, Hashable {
     let name: String
     let url: String

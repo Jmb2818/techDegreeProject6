@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Protocol for presenting an alert from any ViewController
 protocol NotificationPostable {}
 
 extension NotificationPostable {

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Strings used throughout the app and mostly displayed to the user
 class UserStrings {
     enum Error {
         static let okTitle = "Ok"

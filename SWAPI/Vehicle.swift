@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Model for a vehicle that adheres to codable
 struct Vehicle: StarWarsObject, Codable, Hashable {
     let name: String
     let manufacturer: String

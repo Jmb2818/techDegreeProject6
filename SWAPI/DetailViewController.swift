@@ -9,12 +9,14 @@
 import UIKit
 
 class DetailViewController: UIViewController, NotificationPostable {
+    
+    // MARK: Properties
     var results: [StarWarsObject] = []
     var selectedResult: StarWarsObject?
     weak var database: StarWarsDataSource?
     
+    // MARK: IBOutlets
     @IBOutlet weak var pickerView: UIPickerView!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var smallestCharacter: UILabel!
@@ -24,14 +26,21 @@ class DetailViewController: UIViewController, NotificationPostable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        formatNavigationBar()
+        sortObjectsBySize(results: results)
+        conversionTextField.text = GeneralStrings.one
+    }
+    
+    private func formatNavigationBar() {
+        // Format the navigation bar to match the mock
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1058823529, green: 0.1254901961, blue: 0.1411764706, alpha: 1)
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.5529411765, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
-        sortObjectsBySize(results: results)
-        conversionTextField.text = "1"
     }
     
     func sortObjectsBySize(results: [StarWarsObject]) {
+        // Sort results by size for the bottom view
         if let characterResults = results as? [Character] {
             let sortedCharacters = characterResults.sorted(by: { $0.heightAsInt > $1.heightAsInt })
             let sortedCharactersWithoutUnknown = sortedCharacters.filter { $0.heightAsInt != 0 }
@@ -51,6 +60,7 @@ class DetailViewController: UIViewController, NotificationPostable {
     }
     
     func findHomeWorldIfPossible(result: StarWarsObject) -> Planet? {
+        // Find the planet URL that matches the character home URL if possible to get planet name
         if let character = result as? Character {
             return database?.findHomeworld(character: character)
         }
@@ -58,6 +68,7 @@ class DetailViewController: UIViewController, NotificationPostable {
     }
 }
 
+// MARK: UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -93,6 +104,7 @@ extension DetailViewController: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
 extension DetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? InfoCell else { return }
@@ -111,6 +123,7 @@ extension DetailViewController: UITableViewDelegate {
     }
 }
 
+// MARK: UIPickerViewDataSource
 extension DetailViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -121,6 +134,7 @@ extension DetailViewController: UIPickerViewDataSource {
     }
 }
 
+// MARK: UIPickerViewDelegate
 extension DetailViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -135,6 +149,7 @@ extension DetailViewController: UIPickerViewDelegate {
     }
 }
 
+// MARK: UITextFieldDelegate
 extension DetailViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

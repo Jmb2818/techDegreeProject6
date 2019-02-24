@@ -11,6 +11,7 @@ import UIKit
 extension String {
     
     func capitalizeBirthYear() -> String {
+        // Capitalize the specific birth year format from the API
         if self == UserStrings.General.unknown {
             return UserStrings.General.unknown.capitalized
         }
@@ -19,6 +20,7 @@ extension String {
     }
     
     func capitalizeTitle() -> String {
+        // Capitalize the name of object format correctly from the API
         var shouldCapitalizeNextElement: Bool = false
         var characters: [String] = []
         guard self != UserStrings.General.unknown else {

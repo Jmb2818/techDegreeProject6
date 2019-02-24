@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Error enum for all the errors thrown in the app
 enum SWAPIError: Error {
     case generic
     case unableToParse

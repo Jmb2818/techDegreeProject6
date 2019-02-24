@@ -12,6 +12,7 @@ typealias GeneralStrings = UserStrings.General
 typealias CharacterStrings = UserStrings.Character
 typealias VehicleStrings = UserStrings.Vehicle
 
+// Model for the DetailViewController's TableViewCell
 struct InfoCellModel {
     let name: String
     let cellTitle: String
@@ -34,6 +35,7 @@ struct InfoCellModel {
         }
     }
     
+    // MARK: Formatting private init's for each category
     private init(character: Character, indexPath: IndexPath, planet: Planet? = nil) {
         name = character.name.capitalizeTitle()
         switch indexPath.row {

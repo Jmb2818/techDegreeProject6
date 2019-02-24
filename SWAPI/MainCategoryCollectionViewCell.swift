@@ -9,10 +9,12 @@
 import UIKit
 
 class MainCategoryCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: IBOutlets
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
     
-    
+    // MARK: Configure Methods
     func configure(for indexPath: IndexPath) {
         switch indexPath.item {
         case 0:

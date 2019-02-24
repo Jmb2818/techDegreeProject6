@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Main result object model with just name accessible
 protocol StarWarsObject {
     var name: String { get }
 }

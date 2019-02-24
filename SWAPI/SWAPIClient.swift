@@ -23,6 +23,7 @@ class SWAPIClient {
     }
     
     func getCharacterResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Character>>) {
+        // Wrapper function to do generic request with the correct url
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(.failure(SWAPIError.invalidURL))
             return
@@ -34,6 +35,7 @@ class SWAPIClient {
     }
     
     func getVehicleResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Vehicle>>) {
+        // Wrapper function to do generic request with the correct url
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(.failure(SWAPIError.invalidURL))
             return
@@ -45,6 +47,7 @@ class SWAPIClient {
     }
     
     func getStarshipResults(absoluteString: String?, completionHandler completion: @escaping ResultCompletion<Page<Starship>>) {
+        // Wrapper function to do generic request with the correct url
         guard let urlString = absoluteString, let url = URL(string: urlString) else {
             completion(.failure(SWAPIError.invalidURL))
             return
@@ -67,6 +70,7 @@ class SWAPIClient {
     }
     
     private func requestCodableObject<T: Codable>(request: URLRequest, completionHandler completion: @escaping ResultCompletion<T>) {
+        // Main generic function that makes the request and returns codable object
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
