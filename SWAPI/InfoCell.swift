@@ -27,10 +27,6 @@ class InfoCell: UITableViewCell, NotificationPostable {
     }
     
     func configureMoney(conversionRate: Int) {
-        guard conversionRate > 0 else {
-            //TODO: Throw conversion rate incorrect error
-            return
-        }
         if thirdLabel.textColor == .white {
             fourthLabel.textColor = .white
             thirdLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.3882352941, blue: 0.4, alpha: 1)
