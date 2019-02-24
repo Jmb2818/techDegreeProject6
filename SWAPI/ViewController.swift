@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, NotificationPostable {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let dataSource = StarWarsDataSource()
@@ -132,8 +132,6 @@ extension ViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 extension ViewController: UICollectionViewDelegate {
@@ -145,7 +143,7 @@ extension ViewController: UICollectionViewDelegate {
         case 1:
             fetchVehicles()
         case 2:
-          fetchStarchips()
+            fetchStarchips()
         default:
             break
         }
