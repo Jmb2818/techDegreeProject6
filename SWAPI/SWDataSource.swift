@@ -34,19 +34,27 @@ class StarWarsDataSource {
     }
     
     var allCharacters: [Character] {
-        return Array(characters)
+        let objectArray = Array(characters)
+        let sortedObjectArray = objectArray.sorted(by: { $0.name < $1.name })
+        return sortedObjectArray
     }
     
     var allVehicles: [Vehicle] {
-        return Array(vehicles)
+        let objectArray = Array(vehicles)
+        let sortedObjectArray = objectArray.sorted(by: { $0.name < $1.name })
+        return sortedObjectArray
     }
     
     var allStarships: [Starship] {
-        return Array(starships)
+        let objectArray = Array(starships)
+        let sortedObjectArray = objectArray.sorted(by: { $0.name < $1.name })
+        return sortedObjectArray
     }
     
     var allPlanets: [Planet] {
-        return Array(planets)
+        let objectArray = Array(planets)
+        let sortedObjectArray = objectArray.sorted(by: { $0.name < $1.name })
+        return sortedObjectArray
     }
     
     

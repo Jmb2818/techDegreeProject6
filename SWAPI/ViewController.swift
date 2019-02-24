@@ -30,7 +30,6 @@ class ViewController: UIViewController, NotificationPostable {
     
     private func load() {
         loadingIndicator.startAnimating()
-        //TODO: Fix still being able to click cells
         collectionView.isUserInteractionEnabled = false
     }
     
@@ -50,22 +49,21 @@ class ViewController: UIViewController, NotificationPostable {
             self.displayDetailView(results: self.dataSource.allCharacters, title: UserStrings.General.characters, planets: self.dataSource.allPlanets)
             return
         }
-        dataSource.getCharacters(url: "https://swapi.co/api/people/") { [weak self] result in
+        dataSource.getCharacters(url: UserStrings.General.peopleURL) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let characterResults):
-                self.dataSource.getPlanets(url: "https://swapi.co/api/planets/") { [weak self] result in
+                self.dataSource.getPlanets(url: UserStrings.General.planetsURL) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
                     case .success(let planetResults):
-                        self.loadingIndicator.startAnimating()
-                        self.displayDetailView(results: Array(characterResults), title: UserStrings.General.characters, planets: Array(planetResults))
+                        self.loadingIndicator.stopAnimating()
+                        self.displayDetailView(results: Array(characterResults).sorted(by: { $0.name < $1.name }),
+                                               title: UserStrings.General.characters,
+                                               planets: Array(planetResults).sorted(by: { $0.name < $1.name }))
                     case .failure(let error):
-                        if let swError = error as? SWAPIError {
-                            self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
-                        } else {
-                            self.presentAlert(from: self, title: SWAPIError.generic.errorTitle, message: SWAPIError.generic.errorMessages)
-                        }
+                        let swError = (error as? SWAPIError) ?? SWAPIError.generic
+                        self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
                     }
                 }
             case .failure(let error):
@@ -81,12 +79,12 @@ class ViewController: UIViewController, NotificationPostable {
             self.displayDetailView(results: self.dataSource.allVehicles, title: UserStrings.General.vehicles)
             return
         }
-        dataSource.getVehicles(url: "https://swapi.co/api/vehicles/") { [weak self] result in
+        dataSource.getVehicles(url: UserStrings.General.vehiclesURL) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let vehicleResults):
                 self.loadingIndicator.stopAnimating()
-                self.displayDetailView(results: Array(vehicleResults), title: UserStrings.General.vehicles)
+                self.displayDetailView(results: Array(vehicleResults).sorted(by: { $0.name < $1.name }), title: UserStrings.General.vehicles)
             case .failure(let error):
                 let swError = (error as? SWAPIError) ?? SWAPIError.generic
                 self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)
@@ -100,12 +98,12 @@ class ViewController: UIViewController, NotificationPostable {
             self.displayDetailView(results: self.dataSource.allStarships, title: UserStrings.General.starships)
             return
         }
-        dataSource.getStarships(url: "https://swapi.co/api/starships/") { [weak self] result in
+        dataSource.getStarships(url: UserStrings.General.starshipsURL) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let starshipResults):
                 self.loadingIndicator.stopAnimating()
-                self.displayDetailView(results: Array(starshipResults), title: UserStrings.General.starships)
+                self.displayDetailView(results: Array(starshipResults).sorted(by: { $0.name < $1.name }), title: UserStrings.General.starships)
             case .failure(let error):
                 let swError = (error as? SWAPIError) ?? SWAPIError.generic
                 self.presentAlert(from: self, title: swError.errorTitle, message: swError.errorMessages)

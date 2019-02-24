@@ -24,6 +24,10 @@ class UserStrings {
         static let usd = "USD"
         static let credits = "Credits"
         static let one = "1"
+        static let peopleURL = "https://swapi.co/api/people/"
+        static let vehiclesURL = "https://swapi.co/api/vehicles/"
+        static let starshipsURL = "https://swapi.co/api/starships/"
+        static let planetsURL = "https://swapi.co/api/planets/"
     }
     
     enum Character {
