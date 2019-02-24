@@ -12,10 +12,19 @@ import Foundation
 struct Starship: StarWarsObject, Codable, Hashable {
     let name: String
     let manufacturer: String
-    let cost_in_credits: String
+    let cost: String
     let length: String
-    let starship_class: String
+    let starshipClass: String
     let crew: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case manufacturer
+        case cost = "cost_in_credits"
+        case length
+        case starshipClass = "starship_class"
+        case crew
+    }
     
     var lengthAsInt: Int {
         if let length = Int(self.length) {
