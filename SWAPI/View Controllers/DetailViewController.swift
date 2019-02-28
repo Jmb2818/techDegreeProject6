@@ -109,17 +109,23 @@ extension DetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? InfoCell else { return }
         if indexPath.row == 1 {
-            guard let conversionRateString = conversionTextField.text,
-                let conversionRate = Int(conversionRateString),
-                conversionRate > 0 else {
-                    presentAlert(from: self, title: SWAPIError.invalidConversionRate.errorTitle, message: SWAPIError.invalidConversionRate.errorMessages)
-                    cell.configureMoney(conversionRate: 1)
-                    return
-            }
+           let conversionRate = checkConversionRate()
             cell.configureMoney(conversionRate: conversionRate)
         } else if indexPath.row == 2 {
             cell.configureLength()
         }
+    }
+    
+    private func checkConversionRate() -> Double {
+        let filteredConversionRateString = conversionTextField.text?.filter({ $0 != "," })
+        guard let conversionRateString = filteredConversionRateString,
+            let conversionRate = Double(conversionRateString),
+            conversionRate > 0 else {
+            presentAlert(from: self, title: SWAPIError.invalidConversionRate.errorTitle, message: SWAPIError.invalidConversionRate.errorMessages)
+            return 1.0
+        }
+        
+        return conversionRate
     }
 }
 

@@ -29,7 +29,7 @@ class InfoCell: UITableViewCell, NotificationPostable {
     }
     
     // MARK: Congfigure Methods
-    func configureMoney(conversionRate: Int) {
+    func configureMoney(conversionRate: Double) {
         // Configure the cell for the money conversion option being selected
         if thirdLabel.textColor == .white {
             fourthLabel.textColor = .white
