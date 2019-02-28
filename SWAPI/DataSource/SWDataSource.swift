@@ -70,9 +70,6 @@ class StarWarsDataSource {
                     self.getCharacters(url: results.next, completionHandler: completion)
                 } else {
                     completion(.success(self.characters))
-                    if !self.characters.isEmpty {
-                        self.characters.removeAll()
-                    }
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -94,9 +91,6 @@ class StarWarsDataSource {
                     self.getVehicles(url: results.next, completionHandler: completion)
                 } else {
                     completion(.success(self.vehicles))
-                    if !self.vehicles.isEmpty {
-                       self.vehicles.removeAll()
-                    }
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -118,9 +112,6 @@ class StarWarsDataSource {
                     self.getStarships(url: results.next, completionHandler: completion)
                 } else {
                     completion(.success(self.starships))
-                    if !self.starships.isEmpty {
-                        self.starships.removeAll()
-                    }
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -142,9 +133,6 @@ class StarWarsDataSource {
                     self.getPlanets(url: results.next, completionHandler: completion)
                 } else {
                     completion(.success(self.planets))
-                    if !self.planets.isEmpty {
-                        self.planets.removeAll()
-                    }
                 }
             case .failure(let error):
                 completion(.failure(error))

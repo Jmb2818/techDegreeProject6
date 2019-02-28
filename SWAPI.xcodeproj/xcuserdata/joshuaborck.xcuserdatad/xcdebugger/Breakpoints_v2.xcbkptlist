@@ -35,5 +35,85 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SWAPI/DataSource/SWDataSource.swift"
+            timestampString = "573017175.138604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "getPlanets(url:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SWAPI.Result&lt;SWAPI.Page&lt;SWAPI.Planet&gt;&gt;) -&gt; () in SWAPI.StarWarsDataSource.getPlanets(url: Swift.Optional&lt;Swift.String&gt;, completionHandler: (SWAPI.Result&lt;Swift.Set&lt;SWAPI.Planet&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "SWAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joshuaborck/Desktop/Projects/SWAPI/SWAPI/DataSource/SWDataSource.swift"
+                  timestampString = "573017175.4378459"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "252">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SWAPI.Planet) -&gt; (inserted: Swift.Bool, memberAfterInsert: SWAPI.Planet) in closure #1 (SWAPI.Result&lt;SWAPI.Page&lt;SWAPI.Planet&gt;&gt;) -&gt; () in SWAPI.StarWarsDataSource.getPlanets(url: Swift.Optional&lt;Swift.String&gt;, completionHandler: (SWAPI.Result&lt;Swift.Set&lt;SWAPI.Planet&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "SWAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joshuaborck/Desktop/Projects/SWAPI/SWAPI/DataSource/SWDataSource.swift"
+                  timestampString = "573017175.441178"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SWAPI/DataSource/SWDataSource.swift"
+            timestampString = "573017175.139032"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "getPlanets(url:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SWAPI/DataSource/SWDataSource.swift"
+            timestampString = "573017175.139299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "getPlanets(url:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
